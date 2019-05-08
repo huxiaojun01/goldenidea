@@ -32,6 +32,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public MessageUtil addArticle(Map<String, Object> article) {
+        System.out.println("测试commit");
         MessageUtil mu = new MessageUtil();
         String file_pk = Snowflake.getInstance().nextId().toString();
         article.put("article_pk", Snowflake.getInstance().nextId());
