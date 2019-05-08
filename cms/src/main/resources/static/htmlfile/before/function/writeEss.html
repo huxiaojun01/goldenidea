@@ -45,7 +45,14 @@
     <!--图片-->
     <div class="row">
         <div class="col-xs-1"></div>
-        <div class="col-xs-10 picture" id="articleLogo">封面图片</div>
+        <div class="col-xs-10 picture" id="articleLogo" onclick="fileSelect();" style="background: url('../../../bootstrap-3.3.7-dist/img/picture_default.png') no-repeat center;">
+            封面图片
+        </div>
+        <div class="face">
+            <form id="form_face" enctype="multipart/form-data" style="width:auto;">
+                <input type="file" name="file" id="fileToUpload" onchange="fileSelected();" style="display:none;">
+            </form>
+        </div>
         <div class="col-xs-1"></div>
     </div>
     <!--正文-->
@@ -78,6 +85,11 @@
             </form>
             <form id="filectr">
                 <b>文件权限:</b>
+                <input type="radio" name="resourcePower" value="1" checked />对外开放
+                <input type="radio" name="resourcePower" value="2" />会员可见
+                <input type="radio" name="resourcePower" value="3"/>个人可见
+                <br/><br/>
+                <b>文章权限:</b>
                 <input type="radio" name="articlePower" value="1" checked />对外开放
                 <input type="radio" name="articlePower" value="2" />会员可见
                 <input type="radio" name="articlePower" value="3"/>个人可见

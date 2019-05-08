@@ -80,8 +80,7 @@ function addArticle() {
         success: function (mu) {
             if (mu.m_istatus == 1) {
                 alert(mu.m_strMessage);
-                window.close();
-                //window.location.href="../module/index-login.html?userFaceUrl="+userFaceUrl+"&telphone="+telphone;
+                window.location.href="../module/index-login.html?userFaceUrl="+userFaceUrl+"&telphone="+telphone;
             } else {
                 alert(mu.m_strMessage);
             }

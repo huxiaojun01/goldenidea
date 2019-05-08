@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.goldenidea.cms.dao.ArticleDao">
     <insert id="addArticle">
-        insert into fun_article(article_pk,articleTitle,articleContent,articleHtml,file_pk,
-          articleTextNumber,articleRead,commentNumber,likeNumber,unLikeNumber,articleType,articlePower,user_pk,createTime)
-        values(#{article_pk},#{articleTitle},#{articleContent},#{articleHtml},#{file_pk},
-          #{articleTextNumber},0,0,0,0,#{articleType},#{articlePower},#{user_pk},now())
+        insert into fun_article(article_pk,articleTitle,articleContent,articleHtml,file_pk,resource_pk,
+          articleTextNumber,articleRead,commentNumber,likeNumber,unLikeNumber,articleType,articlePower,resourcePower,user_pk,createTime)
+        values(#{article_pk},#{articleTitle},#{articleContent},#{articleHtml},#{file_pk},#{resource_pk},
+          #{articleTextNumber},0,0,0,0,#{articleType},#{articlePower},#{resourcePower},#{user_pk},now())
     </insert>
     <delete id="deleteArticleByPK">
         delete from fun_article where article_pk=#{article_pk}
@@ -13,7 +13,7 @@
     <select id="getArticleByPK" resultType="Map">
         select a.article_pk,a.articleTitle,a.articleContent,a.articleHtml,a.file_pk,
         a.articleTextNumber,a.articleRead,a.commentNumber,a.likeNumber,a.unLikeNumber,a.articleType,a.articlePower,a.user_pk,
-        date_format(a.createTime,'%Y-%m-%d %H:%i:%S') createTime,f.fileUrl,u.telphone
+        date_format(a.createTime,'%Y-%m-%d %H:%i:%S') createTime,f.fileUrl,u.telphone,f.fileName,a.resourcePower
         from fun_article a
         left join fun_file f on (a.file_pk=f.file_pk and f.fileState!=0)
         inner join sch_user u on a.user_pk=u.user_pk

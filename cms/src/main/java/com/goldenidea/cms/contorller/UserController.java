@@ -44,6 +44,7 @@ public class UserController {
             userSession.setEmail(String.valueOf(user.get("email")));
             userSession.setUserPwd(String.valueOf(user.get("userPwd")));
             userSession.setUserFaceUrl(String.valueOf(user.get("userFaceUrl")));
+            userSession.setUserLevel(String.valueOf(user.get("userLevel")));
             userSession.setUser_pk(String.valueOf(user.get("user_pk")));
             request.getSession().setAttribute("userSession", userSession);
         }

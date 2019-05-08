@@ -32,16 +32,17 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public MessageUtil addArticle(Map<String, Object> article) {
-        System.out.println("测试commit");
         MessageUtil mu = new MessageUtil();
         String file_pk = Snowflake.getInstance().nextId().toString();
+        String file_pk1 = Snowflake.getInstance().nextId().toString();
         article.put("article_pk", Snowflake.getInstance().nextId());
+        article.put("resource_pk", file_pk1);
         article.put("file_pk", file_pk);
         int i = this.articleDao.addArticle(article);
         if (i > 0) {
             mu.setM_istatus(1);
             mu.setM_strMessage("发布成功！");
-            //添加记录
+            //添加记录-封面图片
             Map<String, Object> resource = new HashMap<>();
             resource.put("file_pk", file_pk);
             String fileUrl = String.valueOf(article.get("articleImage"));
@@ -49,7 +50,15 @@ public class ArticleServiceImpl implements ArticleService {
             String fileName = fileUrl.substring(lastIndexOf + 1);
             resource.put("fileName", fileName);
             resource.put("fileUrl", fileUrl);
-            this.resourceDao.addResource(resource);
+            int i1 = this.resourceDao.addResource(resource);
+            //添加记录-上传资源
+            resource.replace("file_pk", file_pk1);
+            String fileUrl1 = String.valueOf(article.get("resource"));
+            int lastIndexOf1 = fileUrl.lastIndexOf("/");
+            String fileName1 = fileUrl.substring(lastIndexOf1 + 1);
+            resource.replace("fileName", fileName1);
+            resource.replace("fileUrl", fileUrl1);
+            int i2 = this.resourceDao.addResource(resource);
             //积分增加
             String user_pk = String.valueOf(article.get("user_pk"));
             //文章类型：1-文章  2-心情  3-想法
@@ -91,12 +100,33 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public MessageUtil getArticleByPK(String article_pk) {
+    public MessageUtil getArticleByPK(String article_pk, UserSession user) {
         MessageUtil mu = new MessageUtil();
         Map<String, Object> article = this.articleDao.getArticleByPK(article_pk);
         if (article != null && !article.isEmpty()) {
             mu.setM_istatus(1);
             mu.setM_strMessage("查询成功！");
+            //下载权限判断 (文件权限：1-对外开放  2-仅会员可见  3-个人可见)
+            boolean isDownload = false; //下载权限
+            int resourcePower = Integer.parseInt(article.get("resourcePower").toString());
+            String userType = user.getUserType();   //0-管理员  1-VIP 2-普通用户
+            if (resourcePower == 1) {   //对外开放
+                isDownload = true;
+            } else if (resourcePower == 2) {    //仅会员
+                if (userType.equals("1")) {
+                    isDownload = true;
+                } else {
+                    isDownload = false;
+                }
+            } else { //个人可见
+
+            }
+            String login_user_pk = user.getUser_pk();
+            String user_pk = article.get("user_pk").toString();
+            if (login_user_pk.equals(user_pk)) {  //本人资源--可下载
+                isDownload = true;
+            }
+            article.put("isDownload", isDownload);
             mu.setM_object(article);
             //阅读量+1
             this.articleDao.addArticleReadByPK(article_pk);
@@ -193,7 +223,7 @@ public class ArticleServiceImpl implements ArticleService {
         String file_pk = Snowflake.getInstance().nextId().toString();
         article.replace("file_pk", file_pk);
         int i = this.articleDao.updateArticle(article);
-        if(i>0){
+        if (i > 0) {
             mu.setM_istatus(1);
             mu.setM_strMessage("修改成功！");
             //添加记录
@@ -207,7 +237,7 @@ public class ArticleServiceImpl implements ArticleService {
             this.resourceDao.addResource(resource);
             //删除原有记录
             this.resourceDao.deleteResourceByPK(article.get("file_pk").toString());
-        }else {
+        } else {
             mu.setM_istatus(0);
             mu.setM_strMessage("修改失败！");
         }

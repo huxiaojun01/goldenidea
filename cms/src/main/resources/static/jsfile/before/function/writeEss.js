@@ -1,6 +1,7 @@
 var telphone = getUrlParamValue("telphone");
 var userFaceUrl = getUrlParamValue("userFaceUrl");
 var articleImage="";    //封面图片
+var esource;   //资源路径
 $(function () {
     if(userFaceUrl!=null && userFaceUrl!='' && userFaceUrl !='null'){
         $("#userFaceUrl").attr("src", "http://localhost:8080/storage/" + userFaceUrl);
@@ -27,10 +28,8 @@ function upload() {
         processData: false,
         success: function(data) {
             if (data.m_istatus==1){ //上传成功
-                alert(data.m_strMessage);
-                articleImage = data.m_object;   //图片路径
-                var html = "<img width='100%' height='100%' src='"+"http://localhost:8080/storage/"+articleImage+"'/>";
-                $("#articleLogo").html(html);
+                resource = data.m_object;   //资源路径
+                alert("上传成功！");
             } else {
                 alert(data.m_strMessage);
             }
@@ -59,6 +58,7 @@ function addArticle() {
     }
     var articleTextNumber = articleContent.length;
     var articleType = 1; //1-文章  2-心情  3-想法
+    var resourcePower = $("input[name=resourcePower]:checked").val();
     var articlePower = $("input[name=articlePower]:checked").val();
 
 
@@ -67,9 +67,11 @@ function addArticle() {
     obj['articleContent'] = articleContent;
     obj['articleHtml'] = articleHtml;
     obj['articleImage'] = articleImage;
+    obj['resource'] = resource;
     obj['articleTextNumber'] = articleTextNumber;
     obj['articleType'] = articleType;
     obj['articlePower'] = articlePower;
+    obj['resourcePower'] = resourcePower;
 
     $.ajax({
         url: "../../../articleController/addArticle.do",
@@ -81,7 +83,7 @@ function addArticle() {
             if (mu.m_istatus == 1) {
                 alert(mu.m_strMessage);
                 window.close();
-                //window.location.href="../module/index-login.html?userFaceUrl="+userFaceUrl+"&telphone="+telphone;
+                window.location.href="../module/index-login.html?userFaceUrl="+userFaceUrl+"&telphone="+telphone;
             } else {
                 alert(mu.m_strMessage);
             }
@@ -102,6 +104,38 @@ function logOut() {
         data: "",
         success: function (mu) {
             window.location.href = "../module/index.html";
+        }
+    });
+}
+
+function fileSelect() {
+    document.getElementById("fileToUpload").click();
+}
+
+function fileSelected() {
+    // 文件选择后触发次函数
+    var formData = new FormData($("#form_face")[0]);
+    formData.append("filePath","/articleResource");
+    $.ajax({
+        url: '../../../upload.do',
+        type: 'POST',
+        data: formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            if (data.m_istatus==1){ //上传成功
+                alert(data.m_strMessage);
+                articleImage = data.m_object;   //图片路径
+                var html = "<img width='100%' height='100%' src='"+"http://localhost:8080/storage/"+articleImage+"'/>";
+                $("#articleLogo").html(html);
+            } else {
+                alert(data.m_strMessage);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("请求失败!错误码:" + XMLHttpRequest.status);
         }
     });
 }

@@ -4,23 +4,24 @@ var article_pk = getUrlParamValue("article_pk");
 var telphone = getUrlParamValue("telphone");
 var userFaceUrl = getUrlParamValue("userFaceUrl");
 $(function () {
-    if(userFaceUrl!=null && userFaceUrl!='' && userFaceUrl !='null'){
+    if (userFaceUrl != null && userFaceUrl != '' && userFaceUrl != 'null') {
         $("#userFaceUrl").attr("src", "http://localhost:8080/storage/" + userFaceUrl);
     } else {
         $("#userFaceUrl").attr("src", "/img/default.png");
     }
 
-    $("a[name=personal]").attr("href","../personal/personal.html?telphone="+telphone+"&userFaceUrl="+userFaceUrl);
+    $("a[name=personal]").attr("href", "../personal/personal.html?telphone=" + telphone + "&userFaceUrl=" + userFaceUrl);
 
-    $("#home1").attr("href", "../module/index-login.html?telphone="+telphone+"&userFaceUrl="+userFaceUrl);
-    $("#idea1").attr("href", "../module/idea-login.html?telphone="+telphone+"&userFaceUrl="+userFaceUrl);
-    $("#mood1").attr("href", "../module/mood-login.html?telphone="+telphone+"&userFaceUrl="+userFaceUrl);
+    $("#home1").attr("href", "../module/index-login.html?telphone=" + telphone + "&userFaceUrl=" + userFaceUrl);
+    $("#idea1").attr("href", "../module/idea-login.html?telphone=" + telphone + "&userFaceUrl=" + userFaceUrl);
+    $("#mood1").attr("href", "../module/mood-login.html?telphone=" + telphone + "&userFaceUrl=" + userFaceUrl);
     getArticleByPK(article_pk);
 
 });
+
 //搜索
 function search() {
-    window.location.href="../function/search-login.html?searchKey=" + $("#searchKey").val()+"&telphone=" + telphone + "&userFaceUrl=" + userFaceUrl;
+    window.location.href = "../function/search-login.html?searchKey=" + $("#searchKey").val() + "&telphone=" + telphone + "&userFaceUrl=" + userFaceUrl;
 }
 
 //获取文章信息
@@ -42,6 +43,13 @@ function getArticleByPK(article_pk) {
                 $("#unLikeNumber").html(data.m_object.unLikeNumber);
                 $("#time").html(data.m_object.createTime);
                 $("#author").html(data.m_object.telphone);
+                //资源下载
+                if (data.m_object.isDownload) { //有下载权限
+                    $("#download").attr("href", "../../../resourceController/download.do?fileUrl=" + data.m_object.fileUrl + "&fileName=" + data.m_object.fileName);
+                } else {    //无权限下载
+                    $("#div").attr("class", "col-xs-6 text-right");
+                    $("#download_div").hide();
+                }
                 //评论
                 getFirstLevelByArticlePK(article_pk);
             } else {
@@ -73,7 +81,7 @@ function getFirstLevelByArticlePK(article_pk) {
                 });
                 $("#moreComment").remove();
                 $("#noMore").remove();
-                if ((page+1)!=total){
+                if ((page + 1) != total) {
                     html += "<div id='moreComment' class=\"text-center\" onclick='moreComment()' style='cursor: pointer;'>查看更多</div>";
                 } else {    //最后一页
                     html += "<div style='cursor: pointer;' id='noMore' class=\"text-center\">没有更多数据了~</div>";
@@ -119,10 +127,10 @@ function addComment() {
                 $("#comment").html("<div class=\"form-group\"><h4 id=\"section-3\">评论区</h4>" +
                     "<textarea class=\"form-control\" rows=\"3\" id=\"commentContent\">你有什么好办法吗？</textarea>" +
                     "<button class=\"fbbtn\" onclick=\"addComment()\">发布</button></div>");
-                page=0;
-                total=1;
+                page = 0;
+                total = 1;
                 $("#articleContent").html("");
-               getArticleByPK(article_pk);
+                getArticleByPK(article_pk);
             } else {
                 alert(mu.m_strMessage);
             }
@@ -139,31 +147,32 @@ function addLikeNumber() {
         url: "../../../articleController/addLikeNumberByPK.do",
         type: "POST",
         dataType: "json",
-        data: "article_pk=" + article_pk+"&type=1",
+        data: "article_pk=" + article_pk + "&type=1",
         success: function (mu) {
             if (mu.m_istatus == 1) {
                 alert(mu.m_strMessage);
                 $("#articleContent").html("");
                 getArticleByPK(article_pk);
-            }else {
+            } else {
                 alert(mu.m_strMessage);
             }
         }
     });
 }
+
 //反对
 function addUnLikeNumber() {
     $.ajax({
         url: "../../../articleController/addLikeNumberByPK.do",
         type: "POST",
         dataType: "json",
-        data: "article_pk=" + article_pk+"&type=0",
+        data: "article_pk=" + article_pk + "&type=0",
         success: function (mu) {
             if (mu.m_istatus == 1) {
                 alert(mu.m_strMessage);
                 $("#articleContent").html("");
                 getArticleByPK(article_pk);
-            }else {
+            } else {
                 alert(mu.m_strMessage);
             }
         }

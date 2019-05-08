@@ -30,8 +30,9 @@ public class ArticleController {
     }
 
     @RequestMapping("/getArticleByPK.do")
-    MessageUtil getArticleByPK(String article_pk){
-        return this.articleService.getArticleByPK(article_pk);
+    MessageUtil getArticleByPK(String article_pk, HttpServletRequest request){
+        UserSession user = (UserSession)request.getSession().getAttribute("userSession");
+        return this.articleService.getArticleByPK(article_pk, user);
     }
 
     @RequestMapping("/getArticleListPaging.do")

@@ -11,8 +11,21 @@ public class UserSession implements Serializable {
     private String telphone;
     private String email;
     private String userPwd;
+
+    public String getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(String userLevel) {
+        this.userLevel = userLevel;
+    }
+
+    private String userLevel;
     private String userFaceUrl;
     private Timestamp userRegisterTime;
+
+    public UserSession() {
+    }
 
     public String getUser_pk() {
         return user_pk;

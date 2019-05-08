@@ -31,7 +31,6 @@ function getArticleByPK(article_pk) {
         dataType: "json",
         data: "article_pk=" + article_pk,
         success: function (data) {
-            console.log(data)
             if (data.m_istatus == "1") {
                 //文章
                 var html = "<img width='100%' height='100%' src='" + "http://localhost:8080/storage/" + data.m_object.fileUrl + "'/>";
@@ -43,6 +42,13 @@ function getArticleByPK(article_pk) {
                 $("#unLikeNumber").html(data.m_object.unLikeNumber);
                 $("#time").html(data.m_object.createTime);
                 $("#author").html(data.m_object.telphone);
+                //资源下载
+                if (data.m_object.isDownload) { //有下载权限
+                    $("#download").attr("href", "../../../resourceController/download.do?fileUrl=" + data.m_object.fileUrl + "&fileName=" + data.m_object.fileName);
+                } else {    //无权限下载
+                    $("#div").attr("class", "col-xs-6 text-right");
+                    $("#download_div").hide();
+                }
                 //评论
                 getFirstLevelByArticlePK(article_pk);
             } else {
