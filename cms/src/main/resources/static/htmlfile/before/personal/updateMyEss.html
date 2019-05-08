@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>修改文章</title>
+<link rel="stylesheet" href="../../../font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../../bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" href="../../../cssfile/indexcss.css">
+<script src="../../../jsfile/jquery.js"></script>
+<script src="../../../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<head>
+</head>
+<body>
+
+<!---------------------- 顶部导航栏 开始-------------------------------->
+<nav class="navbar yellowbg">
+    <div class="container-fluid">
+        <div class="navbar-header"><img id="toplogo" src="../../../img/logo240x50.png" /><b class="toptitle">修改文章</b></div>
+        <div class="collapse navbar-collapse" id="myNavbar"  >
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img style="width: 35px;height: 35px;position:relative;top: -7px;" id="userFaceUrl"
+                             class="img-circle" src="../../../img/photo1.jpg" alt=""/>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a name="personal">个人中心</a></li>
+                        <li><a href="../login.html">切换账号</a></li>
+                        <li><a href="javascript:void(0)" onclick="logOut()">退出登录</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <input type="button" class="btn" value="取消" onclick="{window.history.back();}"/>
+                    <input type="button" class="btn" onclick="addArticle()" value="保持" />
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!---------------------- 顶部导航栏 结束-------------------------------->
+
+<!---------------------- 文章正文部分 结束-------------------------------->
+<div class="container">
+    <!--图片-->
+    <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10 picture" id="articleLogo">封面图片</div>
+        <div class="col-xs-1"></div>
+    </div>
+    <!--正文-->
+    <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+            <br>
+            <!--<h1 style="display: inline">标题</h1>-->
+            <div>
+            <label class="">标题: &nbsp;&nbsp;</label>
+            <input id="articleTitle" style="width: 200px;"/>
+            </div>
+            <br/>
+           <!-- <div>此处为文本编辑器</div>-->
+            <div>
+                <textarea class="form-control ckeditor" id="exampleTextarea" name="exampleTextarea" rows="3"></textarea>
+            </div>
+            <hr>
+            <!--<div>此处为正文部分</div>-->
+        </div>
+    </div>
+    <!--文件区-->
+    <div class="navbar navbar-fixed-bottom" style="position: relative;" id="file">
+        <div class="col-xs-7 yellowbg ">
+            <form name="form" id="form" action="../../upload.do" method="post" enctype="multipart/form-data">
+                <input type="button" value="上传文件" id="uploadbtn" onclick="document.form.upload.click()">
+                <input type="file" name="file" id="upload" onchange="document.form.path.value=this.value" multiple="multiple" />
+                <input name="path" id="path" readonly>
+                <p style="color: gray">支持扩展名：.rar .zip .doc .docx .pdf .jpg...</p>
+            </form>
+            <form id="filectr">
+                <b>文件权限:</b>
+                <input type="radio" name="articlePower" value="1" checked />对外开放
+                <input type="radio" name="articlePower" value="2" />会员可见
+                <input type="radio" name="articlePower" value="3"/>个人可见
+                <!--<input type="radio" name="filectr" value="code"/>积分兑换:<input type="text" name="codenum" value="兑换额度" />-->
+            </form>
+        </div>
+    </div>
+
+
+
+</div>
+<!---------------------- 文章正文部分 结束-------------------------------->
+
+
+</body>
+<script src="../../../jsfile/ckeditor/ckeditor.js"></script>
+<script src="../../../jsfile/before/personal/updateMyEss.js"></script>
+</html>

@@ -1,0 +1,128 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>图片上传</title>
+    <style>
+        /*样式1*/
+        .a-upload {
+            padding: 4px 10px;
+            height: 20px;
+            line-height: 20px;
+            position: relative;
+            cursor: pointer;
+            color: #888;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1
+        }
+
+        .a-upload  input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer
+        }
+
+        .a-upload:hover {
+            color: #444;
+            background: #eee;
+            border-color: #ccc;
+            text-decoration: none
+        }
+        /*样式2*/
+        .file {
+            position: relative;
+            display: inline-block;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+        }
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+        .file:hover {
+            background: #AADFFD;
+            border-color: #78C3F3;
+            color: #004974;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function viewmypic1(mypic,upfile1) {
+            if(upfile1.files && upfile1.files[0])
+            {
+                mypic.style.display="";
+//火狐下，直接设img属性
+//mypic.src = upfile1.files[0].getAsDataURL();
+
+                //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+                mypic.src = window.URL.createObjectURL(upfile1.files[0]);
+            }
+            else
+            {
+//IE下
+                if (upfile1.value){
+                    mypic.src=upfile1.value;
+                    mypic.style.display="";
+                    mypic.border=1;
+                }
+            }
+        }
+    </script>
+    <script>
+        function viewmypic2(mypic,upfile2) {
+            if(upfile2.files && upfile2.files[0])
+            {
+                mypic.style.display="";
+//火狐下，直接设img属性
+//mypic.src = upfile2.files[0].getAsDataURL();
+
+                //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+                mypic.src = window.URL.createObjectURL(upfile2.files[0]);
+            }
+            else
+            {
+//IE下
+                if (upfile2.value){
+                    mypic.src=upfile2.value;
+                    mypic.style.display="";
+                    mypic.border=1;
+                }
+            }
+        }
+    </script>
+
+</head>
+<body>
+<center>
+    <form >
+        <a href="javascript:;" class="file"><input name="sfzfj[]" type="file" id="upfile1" size="40" onchange="viewmypic1(showimg1,this.form.upfile1);" />正面</a>
+        <a href="javascript:;" class="file"><input name="sfzfj[]" type="file" id="upfile2" size="40" onchange="viewmypic2(showimg2,this.form.upfile2);" />反面</a>
+    </form>
+    <img name="showimg1" id="showimg1" src="" style="display:none; width:20px" alt="预览图片" /><br>
+    <img name="showimg2" id="showimg2" src="" style="display:none;" alt="预览图片" /><br>
+    <img name="showimg3" id="showimg3" src="" style="display:none;" alt="预览图片" /><br>
+    <br />
+    </div>
+    <div style="display:none">
+    </div>
+</center>
+</body>
+</html>

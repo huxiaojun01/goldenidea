@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>点子</title>
+<link rel="stylesheet" href="../../../bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" href="../../../cssfile/indexcss.css">
+<link rel="stylesheet" href="../../../font-awesome-4.7.0/css/font-awesome.min.css">
+<script src="../../../jsfile/jquery.js"></script>
+<script src="../../../jsfile/before/module/mood-login.js"></script>
+<script src="../../../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<head>
+</head>
+
+<div>
+    <!---------------------- 顶部导航栏 开始-------------------------------->
+    <nav class="navbar yellowbg">
+        <div class="container-fluid">
+            <div class="navbar-header" ><img id="toplogo" src="../../../img/logo240x50.png" /></div>
+            <div class="collapse navbar-collapse" id="myNavbar"  >
+                <ul class="nav navbar-nav">
+                    <li ><a id="home1" >主页</a></li>
+                    <li><a id="idea1">点子</a></li>
+                    <li class="active"><a id="mood1">社区</a></li>
+                    <li class="search">
+                        <input type="text" id="searchKey" placeholder="  搜索..">
+                        <input type="button" class="button" value="搜索" onclick="search()"/>
+                    </li>
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!--此处需要呈现头像的略缩图-->
+                                <img style="width: 35px;height: 35px;position:relative;top: -7px;" id="userFaceUrl"
+                                     class="img-circle" src="../../../img/photo1.jpg" alt=""/>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a name="personal">个人中心</a></li>
+                                <li><a href="../login.html">切换账号</a></li>
+                                <li><a href="javascript:void(0)" onclick="logOut()">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!---------------------- 顶部导航栏 结束-------------------------------->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <!---------------------- 底部左侧文章 开始-------------------------------->
+            <div class="col-md-6 " id="content">
+                每天都要有不一样的心情哟~
+                <!--<div  class="message">
+                    Nam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec est cons
+                    ecteturNam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec e
+                    st consecteturNam eget purus nec est consectetur vehicula.Nam eget purus nec est consectetur ve
+                    hicula.Nam eget purus nec est consectetur vehicula. Nullam ultrices nisl risus, in viverra liber
+                    oegestas sit amet. Etiam porttito
+                    <div  class="author">
+                        <b style="float:left;">作者：<span>此处为作者名称</span></b>
+                        <b style="float:right;">发表时间：<span>此处显示发表时间</span></b>
+                    </div>
+                </div>
+                <div  class="message">
+                    Nam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec est cons
+                    ecteturNam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec e
+                    st consecteturNam eget purus nec est consectetur vehicula.Nam eget purus nec est consectetur ve
+                    hicula.Nam eget purus nec est consectetur vehicula. Nullam ultrices nisl risus, in viverra liber
+                    oegestas sit amet. Etiam porttito
+                    <div  class="author">
+                        <b style="float:left;">作者：<span>此处为作者名称</span></b>
+                        <b style="float:right;">发表时间：<span>此处显示发表时间</span></b>
+                    </div>
+                </div>
+                <div  class="message">
+                    Nam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec est cons
+                    ecteturNam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec e
+                    st consecteturNam eget purus nec est consectetur vehicula.Nam eget purus nec est consectetur ve
+                    hicula.Nam eget purus nec est consectetur vehicula. Nullam ultrices nisl risus, in viverra liber
+                    oegestas sit amet. Etiam porttito
+                    <div  class="author">
+                        <b style="float:left;">作者：<span>此处为作者名称</span></b>
+                        <b style="float:right;">发表时间：<span>此处显示发表时间</span></b>
+                    </div>
+                </div>
+                <div  class="message">
+                    Nam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec est cons
+                    ecteturNam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec e
+                    st consecteturNam eget purus nec est consectetur vehicula.Nam eget purus nec est consectetur ve
+                    hicula.Nam eget purus nec est consectetur vehicula. Nullam ultrices nisl risus, in viverra liber
+                    oegestas sit amet. Etiam porttito
+                    <div  class="author">
+                        <b style="float:left;">作者：<span>此处为作者名称</span></b>
+                        <b style="float:right;">发表时间：<span>此处显示发表时间</span></b>
+                    </div>
+                </div>
+                <div  class="message">
+                    Nam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec est cons
+                    ecteturNam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec e
+                    st consecteturNam eget purus nec est consectetur vehicula.Nam eget purus nec est consectetur ve
+                    hicula.Nam eget purus nec est consectetur vehicula. Nullam ultrices nisl risus, in viverra liber
+                    oegestas sit amet. Etiam porttito
+                    <div  class="author">
+                        <b style="float:left;">作者：<span>此处为作者名称</span></b>
+                        <b style="float:right;">发表时间：<span>此处显示发表时间</span></b>
+                    </div>
+                </div>
+                <div class="text-center">查看更多</div>-->
+            </div>
+
+            <!---------------------- 底部左侧文章 结束-------------------------------->
+            <div class="col-md-1"></div>
+            <!---------------------- 底部右侧文章 开始-------------------------------->
+            <div class="col-md-3" id="bottomword">
+                <div>
+                    <ul class="nav nav-pills">
+                        <li><a id="writeEss" target="_blank" class="icon1"></a></li>
+                        <li><a id="writeQue" target="_blank" class="icon2"></a></li>
+                        <li><a href="#myModal" role="button" class="icon3" data-toggle="modal"></a></li>
+                        <!----------------- 模态框（Modal）------------------------------>
+                        <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3 id="myModalLabel">写心情</h3>
+                                        <p>分享好玩有趣的新鲜事，和大家说说你此时此刻的心情。</p>
+                                    </div>
+                                    <div class="modal-body">
+                                            <textarea rows="10" cols="78" style="resize:none"></textarea>
+                                    </div>
+                                    <a style="color:#FBC216;text-decoration: none;padding: 20px" href="#"><i class="fa fa-camera" aria-hidden="true"></i>上传照片或视频</a><!--需要上传图片或视频的功能-->
+                                    <div class="modal-footer">
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+                                        <button class="btn btn-primary">发布</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!----------------- 模态框（Modal）------------------------------>
+                    </ul>
+                </div>
+                <hr >
+                <div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="#"><a name="personal">我的文章 </a></li>
+                        <li><a name="personal">我的想法</a></li>
+                        <li><a name="personal">我的心情</a></li>
+                        <li><a id="vip">会员中心</a></li>
+                        <li><a>帮助中心</a></li>
+                        <li><a>版权服务中心</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!---------------------- 底部右侧文章 开始-------------------------------->
+
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+    <div class="bottomcontent text-center">
+        <hr>
+        刘妙玲制作 · Design by Milly <br>
+        金点子指南 · 金点子协议 · 金点子隐私保护指引 · 应用 · 工作 · 申请开通知乎机构号 · 侵权举报 · 网上有害信息举报专区 · 儿童色情信息举报专区<br>
+        违法和不良信息举报：012-34567891 · 电信与服务业务经营许可证 · 网络文化经营许可证 ·联系我们 © 2019 金点子<br>
+    </div>
+</div>
+</body>
+</html>

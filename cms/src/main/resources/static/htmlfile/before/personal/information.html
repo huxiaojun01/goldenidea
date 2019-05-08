@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑信息</title>
+    <link rel="stylesheet" href="../../../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../cssfile/indexcss.css">
+    <link rel="stylesheet" href="../../../font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="../../../jsfile/jquery.js"></script>
+    <script src="../../../jsfile/before/personal/information.js"></script>
+    <script src="../../../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+</head>
+<body>
+
+<div>
+    <!---------------------- 顶部导航栏 开始-------------------------------->
+    <nav class="navbar yellowbg">
+        <div class="container-fluid">
+            <div class="navbar-header" ><img id="toplogo" src="../../../img/logo240x50.png" /></div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a><b>编辑资料</b></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!--此处需要呈现头像的略缩图-->
+                            <img style="width: 35px;height: 35px;position:relative;top: -7px;" id="userFaceUrl"
+                                 class="img-circle" src="../../../img/photo1.jpg" alt=""/>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a name="personal">个人中心</a></li>
+                            <li><a href="../login.html">切换账号</a></li>
+                            <li><a href="javascript:void(0)" onclick="logOut()">退出登录</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!---------------------- 顶部导航栏 结束-------------------------------->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10 topimf">
+                <form name="form" id="form" action="../../upload.do" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" id="upload" onchange="document.form.path.value=this.value" multiple="multiple" hidden="hidden"/>
+                    <input name="path" id="path" readonly="readonly" hidden="hidden">
+                </form>
+                <!--此处需要呈现头像的略缩图,且点击可切换-->
+                <div class="headphoto" onclick="document.form.upload.click()"><img id="userFaceUrl1" style="width: 113px;height: 117px;"></div>
+                <div style="margin: 50px 50px 0px 220px">
+                    <h3 class="inline" id="userName"></h3>
+                    <div class="inline" id="sendWord"> <!--这里要求获取用户的寄语--></div>
+                </div>
+                <div style="margin: 30px 50px 0px 220px">
+                    <h4 class="inline">教育经历</h4>
+                    <div class="inline" id="educationExperience"> 无</div>
+                </div>
+                <div style="margin: 30px 50px 0px 220px">
+                    <h4 class="inline">个人简介</h4>
+                    <div class="inline" id="summary"> 无</div>
+                </div>
+                <a id="info"><div class="return text-center">编辑资料</div></a>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10 yellowbg">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-xs-1"></div>
+                        <label class="col-xs-2 control-label">账号</label>
+                        <div class="col-xs-8">
+                            <div class="form-control-static" id="telphone1">这里要求获取用户的账号</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-1"></div>
+                        <label for="userName1" class="col-xs-2 control-label">用户名</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" id="userName1" placeholder="请输入用户名">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-1"></div>
+                        <label class="col-xs-2 control-label">性别</label>
+                        <div class="col-xs-2">
+                            <select class="form-control" id="userSex">
+                                <option value="1">男</option>
+                                <option value="0">女</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-2 checkbox"><label><input type="checkbox"> 是否对外开放</label></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-1"></div>
+                        <label for="" class="col-xs-2 control-label">生日</label>
+                        <div class="col-xs-2">
+                            <select class="form-control" id="year">
+                                <!--<option>2019</option>
+                                <option>2018</option>
+                                <option>2017</option>
+                                <option>2016</option>
+                                <option>2015</option>
+                                <option>2014</option>-->
+                            </select>
+                        </div>
+                        <div class="col-xs-2">
+                            <select class="form-control" id="month">
+                               <!-- <option value="1">1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>-->
+                            </select>
+                        </div>
+                        <div class="col-xs-2">
+                            <select class="form-control" id="day">
+                               <!--<option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>-->
+                            </select>
+                        </div>
+                        <div class="col-xs-2 checkbox"><label><input type="checkbox"> 是否对外开放</label></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-1"></div>
+                        <label for="telphone" class="col-xs-2 control-label">联系方式</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" id="telphone" placeholder="请输入手机号码">
+                        </div>
+                        <div class="col-xs-2 checkbox"><label><input type="checkbox"> 是否对外开放</label></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-1"></div>
+                        <label for="email" class="col-xs-2 control-label">电子邮箱</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" id="email" placeholder="请输入电子邮箱">
+                        </div>
+                        <div class="col-xs-2 checkbox"><label><input type="checkbox"> 是否对外开放</label></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-1"></div>
+                        <label for="sendWord1" class="col-xs-2 control-label">寄语</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="sendWord1" placeholder="用一句话描述你自己（50字以内）">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-1"></div>
+                        <label for="" class="col-xs-2 control-label">教育经历</label>
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="school" placeholder="学校或教育机构名称">
+                                </div>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="major" placeholder="专业方向">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-1"></div>
+                        <label class="col-xs-2 control-label"></label>
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <select class="form-control" id="education">
+                                        <option value="-1">学历</option>
+                                        <option value="0">高中及以下</option>
+                                        <option value="1">大专</option>
+                                        <option value="2">本科</option>
+                                        <option value="3">硕士</option>
+                                        <option value="4">博士及以上</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-4">
+                                    <select class="form-control" id="enrollmentYear">
+                                        <option value="-1">入学年份</option>
+                                        <!--<option>2019</option>
+                                        <option>2018</option>
+                                        <option>2017</option>
+                                        <option>2016</option>
+                                        <option>2015</option>
+                                        <option>2014</option>-->
+                                    </select>
+                                </div>
+                                <div class="col-xs-4">
+                                    <select class="form-control" id="graduationYear">
+                                        <option value="-1">毕业年份</option>
+                                        <!--<option>2019</option>
+                                        <option>2018</option>
+                                        <option>2017</option>
+                                        <option>2016</option>
+                                        <option>2015</option>
+                                        <option>2014</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-1"></div>
+                        <label for="summary1" class="col-xs-2 control-label">个人简介</label>
+                        <div class="col-xs-8">
+                            <textarea class="form-control" rows="3" id="summary1" placeholder="请填写200字以内的个人简介"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-1"></div>
+                        <label for="" class="col-xs-2 control-label">工作经历</label>
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="company" placeholder="公司或组织名称">
+                                </div>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="position" placeholder="你的职位">
+                                </div>
+                                <div class="col-xs-4 checkbox"><label><input type="checkbox"> 是否对外开放</label></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="text-center">
+                    <button type="submit" class="btn back" onclick="{window.history.back();}">取消</button>
+                    <button type="submit" class="btn save" id="submit">保存</button>
+                </div>
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

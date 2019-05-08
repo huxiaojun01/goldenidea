@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>金点子-登录</title>
+    <link rel="stylesheet" href="../../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../../cssfile/indexcss.css">
+    <link rel="stylesheet" href="../../font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="../../jsfile/indexjs.js"></script>
+    <!--导入 js 库（使用菜鸟教程提供的CDN）-->
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+</head>
+
+<body>
+<div class="container" style="margin-top: 150px">
+    <div class="form row">
+        <form class="form-horizontal " id="login_form" style="padding: 20px 0px">
+            <div class="text-center" >
+                <h1>金点子</h1>
+                <h3>Hey!My Golden Idea!</h3>
+            </div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10">
+                <!--用户名-->
+                <div>
+                    <i class="fa fa-user fa-lg"></i>
+                    <input class="form-control required" id="username" name="username" type="text" placeholder="手机/邮箱/ID" autofocus="autofocus" maxlength="20" />
+                </div>
+                <!--密码-->
+                <div>
+                    <i class="fa fa-lock fa-lg"></i>
+                    <input class="form-control required" id="password" name="password" type="password" placeholder="密码" maxlength="8">
+                </div>
+                <!--记住我-->
+                <div >
+                    <label class="checkbox"><input type="checkbox" id="remember" name="remember" value="1"/>记住我</label>
+                </div>
+                <div class="text-center" style="margin-top: 20px">
+                    <input type="submit" class="pull-right submitbtn" value="登录"/>
+                    <p >二维码登录 · 社交账号登录</p>
+                </div>
+                <div class="text-center" style="margin:30px 0px 20px 0px">
+                    <h4>Join us！点击<a href="register.html" id="register_btn">注册</a>新账号</h4>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

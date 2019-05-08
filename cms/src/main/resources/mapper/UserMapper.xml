@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldenidea.cms.dao.UserDao">
+    <!--登录-->
+    <select id="login" resultType="Map">
+        select * from sch_user
+        where (ID=#{account} or telphone=#{account} or email=#{account}) and userPwd=#{userPwd}
+    </select>
+
+    <insert id="addUser">
+        insert into sch_user(user_pk,userName,ID,userType,telphone,email,userPwd,userRegisterTime)
+        values(#{user_pk},#{telphone},#{ID},2,#{telphone},#{email},#{userPwd},now())
+    </insert>
+    <select id="isRegister" resultType="int">
+        select count(*) from sch_user where telphone=#{telphone} or email=#{email}
+    </select>
+    <delete id="deleteUserByPK">
+        delete from sch_user where user_pk=#{user_pk}
+    </delete>
+    <update id="updateUser">
+        update sch_user
+        set userName=#{userName},userSex=#{userSex},birth=#{birth},telphone=#{telphone},email=#{email},sendWord=#{sendWord},
+        educationExperience=#{educationExperience},education=#{education},enrollmentYear=#{enrollmentYear},graduationYear=#{graduationYear},
+        summary=#{summary},workExperience=#{workExperience},userFaceUrl=#{userFaceUrl},sendWordAndSummaryState=2
+        where user_pk=#{user_pk}
+    </update>
+    <update id="updateUserBack">
+        update sch_user
+        set telphone=#{telphone},email=#{email},userPwd=#{userPwd},userType=#{userType}
+        where user_pk=#{user_pk}
+    </update>
+    <select id="getUserByPK" resultType="Map">
+        select user_pk,userName,birth,ID,userType,telphone,email,userPwd,userFaceUrl,
+        (select sendWord from sch_user where sendWordAndSummaryState=1) sendWord,
+        educationExperience,education,enrollmentYear,graduationYear,
+        (select summary from sch_user where sendWordAndSummaryState=1) summary,
+        workExperience,userIntegral,userLevel,userLevelState,sendWordAndSummaryState,userSex,userRegisterTime
+        from sch_user where user_pk=#{user_pk}
+    </select>
+    <select id="getUserListPaging" resultType="Map">
+        select user_pk,ID,userType,telphone,email,userPwd,userRegisterTime from sch_user
+        <!--where 1=1
+        <if test="searchKey!=null and searchKey!=''">
+            and (ID like concat("%",#{searchKey},"%") or email like concat("%",#{searchKey},"%"))
+        </if>-->
+        order by userRegisterTime desc
+        limit #{offset},#{rows}
+    </select>
+    <select id="getTotalCount" resultType="int">
+        select count(*) from sch_user where 1=1
+        <!--<if test="searchKey!=null and searchKey!=''">
+            and (ID like concat("%",#{searchKey},"%") or email like concat("%",#{searchKey},"%"))
+        </if>-->
+    </select>
+    <update id="updateUserLevel">
+        update sch_user set userLevel=#{userLevel},userLevelState=2 where user_pk=#{user_pk}
+    </update>
+    <select id="getUserMessage" resultType="Map">
+        select (select count(*) from fun_comment where user_pk=#{user_pk} and commentState=1) commentSum,
+        sum(a.likeNumber) likeSum,
+        u.userIntegral,(select case when sum(userLevel) is null then '0' else userLevel end userLevel from sch_user where user_pk=#{user_pk} and userLevelState=1) userLevel
+        from fun_article a left join sch_user u on u.user_pk=a.user_pk left join fun_comment c on c.user_pk=a.user_pk
+        where u.user_pk=#{user_pk}
+    </select>
+    <select id="getUnauditedLevelListPaging" resultType="Map">
+        select * from sch_user where userType!=0 and userLevel!=-1
+        limit #{offset},#{rows}
+    </select>
+    <select id="getUnauditedLevelTotal" resultType="int">
+        select count(*) from sch_user where userType!=0 and userLevel!=-1
+    </select>
+    <!--等级审核-->
+    <update id="updateUserLevelStateByPK">
+        update sch_user
+        set userLevelState=#{userLevelState}
+        where user_pk=#{user_pk}
+    </update>
+    <select id="getUnauditedPersonalMessageListPaging" resultType="Map">
+        select * from sch_user where sendWord is not null and sendWord!=""
+        limit #{offset},#{rows}
+    </select>
+    <select id="getUnauditedPersonalMessageTotal" resultType="int">
+        select count(*) from sch_user where  sendWord is not null and sendWord!=""
+    </select>
+    <update id="updateSendWordAndSummaryStateByPK">
+        update sch_user
+        set sendWordAndSummaryState=#{sendWordAndSummaryState}
+        where user_pk=#{user_pk}
+    </update>
+    <update id="deleteSendWordAndSummaryByPK">
+        update sch_user
+        set sendWord="",summary=""
+        where user_pk=#{user_pk}
+    </update>
+    <select id="getUserDataListPaging" resultType="Map">
+        select u.user_pk,u.userName,
+            (select count(*) from fun_commentrecord where type=1 and article_pk in (select a.article_pk from fun_article a where a.user_pk=u.user_pk)) getLikeSum,
+            (select count(*) from fun_commentrecord where type=0 and article_pk in (select a.article_pk from fun_article a where a.user_pk=u.user_pk)) getUnLikeSum,
+            (select count(*) from fun_comment where commentState=1 and article_pk in (select a.article_pk from fun_article a where a.user_pk=u.user_pk)) getCommentSum,
+            (select count(*) from fun_commentrecord cr where cr.user_pk=u.user_pk and cr.type=1) likeSum,
+            (select count(*) from fun_commentrecord cr where cr.user_pk=u.user_pk and cr.type=0) unLikeSum,
+            (select count(*) from fun_comment c where c.commentState=1 and c.user_pk=u.user_pk) commentSum
+        from sch_user u where u.userType!=0
+        limit #{offset},#{rows}
+    </select>
+</mapper>

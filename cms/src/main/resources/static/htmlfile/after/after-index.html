@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>后台管理</title>
+<link rel="stylesheet" href="../../bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" href="../../font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../cssfile/after.css">
+<script src="../../jsfile/jquery.js"></script>
+<script src="../../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<head>
+</head>
+<!--navbar-left-->
+<body>
+<!--导航栏------------------------------------------>
+<img src="../../img/logo240x82.png" class="logo">
+<nav id="header">
+    <div class="collapse navbar-collapse text-center">
+        <span><!--后台管理--></span>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <!--此处需要呈现头像的略缩图-->
+                    <img style="width: 50px;height: 50px;" class="img-circle" src="../../img/photo1.jpg" alt=""/>
+                    <i aria-hidden="true" id="userName"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="../before/login.html">切换账号</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--左边导航栏------------------------------------------>
+<div id="leftnav">
+    <ul id="myTab" class="nav nav-tabs nav-stacked">
+        <li><b><i class="fa fa-diamond"></i> 金点子,欢迎您的加入！</b></li>
+        <li class="active"><a href="#home" data-toggle="tab">注意事项</a></li>
+
+        <li><i class="fa fa-user"></i> 用户管理</li>
+        <li><a href="#account" data-toggle="tab">用户管理</a></li>
+
+        <li><i class="fa fa-bell"></i> 审核管理</li>
+        <li><a href="#file" data-toggle="tab">资源审核</a></li>
+        <li><a href="#comment" data-toggle="tab">评论审核</a></li>
+        <li><a href="#grade" data-toggle="tab">等级审核</a></li>
+        <li><a href="#information" data-toggle="tab">个人信息审核</a></li>
+
+        <li><i class="fa fa-wrench"></i> 数据中心</li>
+        <li><a href="#formmng" data-toggle="tab">用户数据</a></li>
+    </ul>
+</div>
+<!--导航栏对应的界面------------------------------------------>
+<div id="myTabContent" class="tab-content">
+    <!--注意事项 文字提醒-->
+    <div class="tab-pane fade in active" id="home">
+        <div class="word">
+            <p>尊敬的管理员，您好！</p>
+            <p>欢迎来到“金点子”的后台管理。</p>
+            <p>
+                网站管理员，也被称为webmaster、postmaster、网站架构师、网站开发者、站长、网络管理员等，是设计、开发、运营、维护一个网站的负责人。对于公众站点来说，网站管理员能够更改、处理用户留下的所有评论。</p>
+            <p>那么，作为一个优秀的网站管理人员，应该履行以下职责：</p>
+            <p>一、认真学习业务知识，善于总结经验，互相学习，互相帮助。</p>
+            <p>二、保证信息准确性。输入计算机的信息要保证真实准确，实事求是。</p>
+            <p>三、保证信息时效性。要及时录入、更新、上传、下达信息、保证信息使用及时。</p>
+            <p>四、保证数据库完整性。数据库个案信息必须完整、齐全。</p>
+            <p>五、计算机中的信息，不经批准，不得随意向他人提供。</p>
+            <p>六、不得向他人透露本系统的网络情况。操作员对自己的用户名和口令必须严格保密，并随时更换自己的口令。</p>
+            <p>七、不准对他人透露计算机的硬件配置和软件配置等情况。</p>
+            <p>八、按时认真纪录工作日志。工作日志内容完整、详细、字迹工整、清楚。工作日志要记录开、关机情况，“遇到问题”和“解决问题”情况，数据备份和恢复情况，数据上报下载情况等。</p>
+            <p>九、做好数据备份工作，每月最少备份一次，并且备份到多处。要在工作日志中详细纪录备份时间、备份到何处、备份时数据库状况等。</p>
+            <p>网站管理员核心的责任包括规定和管理一个网站的不同用户的访问权限、网站外观设计和设立网站导航。对内容的布置可能是网站管理员的责任的一个组成部分，而不是内容的创作。</p>
+            <p>通常情况下，网站管理员是读取用户的反馈意见和关于网站功能的投诉的代理人。</p>
+            <p>网站管理员其实更多地是在负责服务器的运行，这要多于制作实际的网页。网页都是由高级设计师处理。</p>
+            <p class="text-right"></br>祝您工作顺利，生活愉快!</p>
+            <p class="text-right">From Miaoling</p>
+        </div>
+    </div>
+
+    <!--用户管理---------------------------------------------------------------->
+    <div class="tab-pane fade" id="account">
+        <div class="word">
+            <p><i class="fa fa-user"> 用户管理</i></br></br></p>
+            <div>
+                <!--<div class="btn-group">
+                    <button type="button" class="btn btn-default">Check All</button>
+                    <button type="button" class="btn btn-default active">Check None</button>
+                </div>-->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" onclick="addUser()">添加</button>
+                    <!--<button type="button" class="btn btn-default">Modify</button>
+                    <button type="button" class="btn btn-default">Delete</button>-->
+                </div>
+                <!--局部刷新-->
+                <i class="fa fa-refresh" onclick="getUserList()" style="cursor:pointer;"> Refresh</i>
+            </div>
+            <!--用户表格-->
+            <div class="tablefile">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>ID</th>
+                        <th>手机号码</th>
+                        <th>邮箱</th>
+                        <th>密码</th>
+                        <th>类型</th>
+                        <th style="width: 150px;">操作</th>
+                    </tr>
+                    <tbody id="data_user">
+
+                    </tbody>
+                </table>
+            </div>
+            <!--分页管理-->
+            <div class="text-center">
+                <ul class="pagination pagination-sm">
+                    <li><a href="javascript:;" onclick="beforePage()">&laquo;</a></li>
+                    <li><a href="javascript:;" id="user_page"></a></li>
+                    <li><a href="javascript:;" onclick="afterPage()">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--资源审核---------------------------------------------------------------->
+    <div class="tab-pane fade" id="file">
+        <div class="word">
+            <p><i class="fa fa-user"> 资源审核</i></br></br></p>
+            <div>
+                <!--<div class="btn-group">
+                    <button type="button" class="btn btn-default">Check All</button>
+                    <button type="button" class="btn btn-default active">Check None</button>
+                </div>-->
+                <!--<div class="btn-group">
+                    <button type="button" class="btn btn-default" onclick="add()">Download</button>
+                    <button type="button" class="btn btn-default">Delete</button>
+                </div>-->
+                <!--局部刷新-->
+                <i class="fa fa-refresh" onclick="getResourceList()" style="cursor:pointer;"> Refresh</i>
+            </div>
+            <!--资源表格-->
+            <div class="tablefile">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>ID</th>
+                        <th>资源路径</th>
+                        <th>资源名称</th>
+                        <th>审核状态</th>
+                        <th>操作</th>
+                    </tr>
+                    <tbody id="data_resource">
+
+                    </tbody>
+                </table>
+            </div>
+            <!--分页管理-->
+            <div class="text-center">
+                <ul class="pagination pagination-sm">
+                    <li><a href="javascript:;" onclick="beforePage()">&laquo;</a></li>
+                    <li><a href="javascript:;" id="resource_page"></a></li>
+                    <li><a href="javascript:;" onclick="afterPage()">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--评论审核---------------------------------------------------------------->
+    <div class="tab-pane fade" id="comment">
+        <div class="word">
+            <p><i class="fa fa-user"> 评论审核</i></br></br></p>
+            <div>
+                <!--<div class="btn-group">
+                    <button type="button" class="btn btn-default">Check All</button>
+                    <button type="button" class="btn btn-default active">Check None</button>
+                </div>-->
+                <!--<div class="btn-group">
+                    <button type="button" class="btn btn-default" onclick="add()">Download</button>
+                    <button type="button" class="btn btn-default">Delete</button>
+                </div>-->
+                <!--局部刷新-->
+                <i class="fa fa-refresh" onclick="getCommentListPaging()" style="cursor:pointer;"> Refresh</i>
+            </div>
+            <!--评论表格-->
+            <div class="tablefile">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>ID</th>
+                        <th>评论内容</th>
+                        <th>审核状态</th>
+                        <th>操作</th>
+                    </tr>
+                    <tbody id="data_comment">
+
+                    </tbody>
+                </table>
+            </div>
+            <!--分页管理-->
+            <div class="text-center">
+                <ul class="pagination pagination-sm">
+                    <li><a href="javascript:;" onclick="beforePage()">&laquo;</a></li>
+                    <li><a href="javascript:;" id="comment_page"></a></li>
+                    <li><a href="javascript:;" onclick="afterPage()">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--等级审核---------------------------------------------------------------->
+    <div class="tab-pane fade" id="grade">
+        <div class="word">
+            <p><i class="fa fa-user"> 等级审核</i></br></br></p>
+            <div>
+                <!--<div class="btn-group">
+                    <button type="button" class="btn btn-default">Check All</button>
+                    <button type="button" class="btn btn-default active">Check None</button>
+                </div>-->
+                <!--<div class="btn-group">
+                    <button type="button" class="btn btn-default" onclick="add()">Download</button>
+                    <button type="button" class="btn btn-default">Delete</button>
+                </div>-->
+                <!--局部刷新-->
+                <i class="fa fa-refresh" onclick="getUnauditedLevel()" style="cursor:pointer;"> Refresh</i>
+            </div>
+            <!--评论表格-->
+            <div class="tablefile">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>ID</th>
+                        <th>用户</th>
+                        <th>等级</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    <tbody id="data_grade">
+
+                    </tbody>
+                </table>
+            </div>
+            <!--分页管理-->
+            <div class="text-center">
+                <ul class="pagination pagination-sm">
+                    <li><a href="javascript:;" onclick="beforePage()">&laquo;</a></li>
+                    <li><a href="javascript:;" id="grade_page"></a></li>
+                    <li><a href="javascript:;" onclick="afterPage()">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--个人信息审核---------------------------------------------------------------->
+    <div class="tab-pane fade" id="information">
+        <div class="word">
+            <p><i class="fa fa-user"> 个人信息审核</i></br></br></p>
+            <div>
+                <!--<div class="btn-group">
+                    <button type="button" class="btn btn-default">Check All</button>
+                    <button type="button" class="btn btn-default active">Check None</button>
+                </div>-->
+                <!--<div class="btn-group">
+                    <button type="button" class="btn btn-default" onclick="add()">Download</button>
+                    <button type="button" class="btn btn-default">Delete</button>
+                </div>-->
+                <!--局部刷新-->
+                <i class="fa fa-refresh" onclick="getUnauditedLevel()" style="cursor:pointer;"> Refresh</i>
+            </div>
+            <!--评论表格-->
+            <div class="tablefile">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>ID</th>
+                        <th>用户</th>
+                        <th>寄语</th>
+                        <th>个人简介</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    <tbody id="data_information">
+
+                    </tbody>
+                </table>
+            </div>
+            <!--分页管理-->
+            <div class="text-center">
+                <ul class="pagination pagination-sm">
+                    <li><a href="javascript:;" onclick="beforePage()">&laquo;</a></li>
+                    <li><a href="javascript:;" id="information_page"></a></li>
+                    <li><a href="javascript:;" onclick="afterPage()">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--数据中心---------------------------------------------------------------->
+    <div class="tab-pane fade" id="formmng">
+        <div class="word">
+            <p><i class="fa fa-user"> 用户数据</i></br></br></p>
+            <div>
+                <!--<div class="btn-group">
+                    <button type="button" class="btn btn-default">Check All</button>
+                    <button type="button" class="btn btn-default active">Check None</button>
+                </div>-->
+                <button type="button" class="btn btn-default"><a href="#" onclick="exportExcel(false)" id="excel">导出当前页</a></button>
+                <button type="button" class="btn btn-default"><a href="#" onclick="exportExcel(true)" id="excelAll">导出所有页</a></button>
+                <!--局部刷新-->
+                <i class="fa fa-refresh"> Refresh</i>
+            </div>
+            <!--报表管理表格-->
+            <div class="tablefile">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>ID</th>
+                        <th>用户</th>
+                        <th>获赞数</th>
+                        <th>获反对数</th>
+                        <th>获评论数</th>
+                        <th>点赞数</th>
+                        <th>反对数</th>
+                        <th>评论数</th>
+                    </tr>
+                    <tbody id="data_formmng">
+
+                    </tbody>
+                </table>
+            </div>
+            <!--分页管理-->
+            <div class="text-center">
+                <ul class="pagination pagination-sm">
+                    <li><a href="javascript:;" onclick="beforePage()">&laquo;</a></li>
+                    <li><a href="javascript:;" id="formmng_page"></a></li>
+                    <li><a href="javascript:;" onclick="afterPage()">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../jsfile/after/after-index.js"></script>
+</html>
+
+
+
+

@@ -1,0 +1,48 @@
+body{background-color:#F7F7F7}
+ul{list-style: none}
+#header{height: 80px;background-color: #fbc216;}
+.logo{float: left;height: 75px}
+.dropdown i{font-size:25px;color:#fbc216;font-weight: bold;text-shadow:2px 2px 2px black;margin-top:15px;}
+.dropdown-toggle{height: 80px;}
+#header span{line-height:80px;font-size: 40px;font-weight:bold;letter-spacing:20px;}
+#header .nav{float: right;margin-right: 30px}
+#leftnav {
+    height: 850px;
+    width:300px ;
+    line-height:50px;
+    background-color:#353535;
+    float: left;
+    font-size: 16px;
+    text-shadow: 0.1em 0.1em 0.1em black;
+    padding-top: 70px;
+    letter-spacing:1px;
+}
+#myTab li{color: white;}
+#myTab i{padding-left: 35px}
+#myTab a{color: #fbc216;}
+#myTab a{width: 100%;padding-left: 100px}
+
+#home,#account,#file,#comment,#grade,#information,#formmng{
+    background-color: white;
+    width:1000px ;
+    height: 600px;
+    border: 1px solid #BBBBBB ;
+    margin-left: 450px;
+    margin-top: 120px;
+    padding: 50px;
+    font-size: 15px;
+}
+#home{text-indent:35px;}
+
+.btn-group{padding-right: 30px}
+.tablefile{
+    width: 900px;
+    height: 380px;
+    background-color:rgba(251,194,22,0.5);
+    margin-top: 30px;
+}
+p{margin: 1px;}
+.pagination li{
+    float: left;
+    margin-left: 10px;
+}

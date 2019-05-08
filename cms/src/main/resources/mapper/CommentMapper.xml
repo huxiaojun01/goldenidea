@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldenidea.cms.dao.CommentDao">
+    <insert id="addComment">
+        insert into fun_comment(comment_pk,article_pk,commentContent,commentParent_pk,user_pk,commentTime,commentState)
+        values(#{comment_pk},#{article_pk},#{commentContent},#{commentParent_pk},#{user_pk},now(),2)
+    </insert>
+    <insert id="addLikeRecord">
+        insert into fun_commentrecord(fabulous_pk, article_pk,user_pk,type,createTime)
+        values(#{fabulous_pk},#{article_pk},#{user_pk},#{type},now())
+    </insert>
+    <delete id="deleteCommentByPK">
+        delete from fun_comment where comment_pk=#{comment_pk}
+    </delete>
+    <delete id="deleteCommentByArticlePK">
+        delete from fun_comment where article_pk=#{article_pk}
+    </delete>
+    <delete id="deleteLikeRecordByArticlePK">
+        delete from fun_commentrecord where article_pk=#{article_pk}
+    </delete>
+    <select id="getFirstLevelByArticlePK" resultType="Map">
+        select c.comment_pk,c.article_pk,c.commentContent,c.commentParent_pk,c.user_pk,u.telphone,
+        date_format(c.commentTime,'%Y-%m-%d %H:%i:%S') createTime
+        from fun_comment c inner join sch_user u on c.user_pk=u.user_pk
+        where c.article_pk=#{article_pk} and c.commentParent_pk is null and c.commentState!=0
+        order by c.commentTime desc
+        limit #{offset},#{rows}
+    </select>
+    <select id="getFirstLevelTotal" resultType="int">
+        select count(*) from fun_comment c
+        where c.article_pk=#{article_pk} and c.commentParent_pk is null and c.commentState!=0
+    </select>
+    <select id="getCommentByArticlePKAndCommentParentPK" resultType="Map">
+        select c.comment_pk,c.article_pk,c.commentContent,c.commentParent_pk,c.user_pk,u.telphone,c.commentTime
+        from fun_comment c inner join sch_user u on c.user_pk=u.user_pk
+        where c.article_pk=#{article_pk} and c.commentParent_pk=#{commentParent_pk}
+        order by c.commentTime desc
+    </select>
+    <!--获取待审核评论列表-->
+    <select id="getCommentListPaging" resultType="Map">
+        select *
+        from fun_comment c
+        <!--where c.commentState=2 --> <!--2:待审核-->
+        order by commentTime desc
+        limit #{offset},#{rows}
+    </select>
+    <select id="getTotalCount" resultType="int">
+        select count(*) from fun_comment c <!--where c.commentState=2-->  <!--2:待审核-->
+    </select>
+    <update id="updateCommentState">
+        update fun_comment set commentState=#{commentState} where comment_pk=#{comment_pk}
+    </update>
+</mapper>

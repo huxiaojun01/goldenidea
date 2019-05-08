@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人中心</title>
+<link rel="stylesheet" href="../../../bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" href="../../../cssfile/indexcss.css">
+<link rel="stylesheet" href="../../../font-awesome-4.7.0/css/font-awesome.min.css">
+<script src="../../../jsfile/jquery.js"></script>
+<script src="../../../jsfile/before/personal/personal.js"></script>
+<script src="../../../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<head>
+</head>
+<body>
+<div>
+    <!---------------------- 顶部导航栏 开始-------------------------------->
+    <nav class="navbar yellowbg">
+        <div class="container-fluid">
+            <div class="navbar-header" ><img id="toplogo" src="../../../img/logo240x50.png" /></div>
+            <div class="collapse navbar-collapse" id="myNavbar"  >
+                <ul class="nav navbar-nav">
+                    <li><a id="home1">主页</a></li>
+                    <li><a id="idea1">点子</a></li>
+                    <li><a id="mood1">社区</a></li>
+                    <li class="search">
+                        <input type="text" id="searchKey" placeholder="  搜索..">
+                        <input type="button" class="button" value="搜索" onclick="search()"/>
+                    </li>
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img style="width: 35px;height: 35px;position:relative;top: -7px;" id="userFaceUrl"
+                                     class="img-circle" src="../../../img/photo1.jpg" alt=""/>
+                                <!--<i style="position: relative;top:-6px;" aria-hidden="true" id="userName"></i>-->
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">个人中心</a></li>
+                                <li><a href="../login.html">切换账号</a></li>
+                                <li><a href="javascript:void(0)" onclick="logOut()">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!---------------------- 顶部导航栏 结束-------------------------------->
+
+    <!---------------------- 顶部个人信息 开始-------------------------------->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10 topimf">
+                <!--此处需要呈现头像的略缩图,且点击可切换-->
+                <div class="headphoto"><img id="userFaceUrl1" style="width: 113px;height: 117px;"></div>
+                <div style="margin: 50px 50px 0px 220px">
+                    <h3 class="inline" id="userName"></h3>
+                    <div class="inline" id="sendWord"> <!--这里要求获取用户的寄语--></div>
+                </div>
+                <div style="margin: 30px 50px 0px 220px">
+                    <h4 class="inline">教育经历</h4>
+                    <div class="inline" id="educationExperience"> 无</div>
+                </div>
+                <div style="margin: 30px 50px 0px 220px">
+                    <h4 class="inline">个人简介</h4>
+                    <div class="inline" id="summary"> 无</div>
+                </div>
+                <a id="info"><div class="return text-center">编辑资料</div></a>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+    <!---------------------- 顶部个人信息 结束-------------------------------->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <!---------------------- 底部左侧文章 开始-------------------------------->
+            <div class="col-xs-6 yellowbg">
+                <ul id="myTab" class="nav nav-tabs text-center" >
+                    <li class="active"><a href="#home" data-toggle="tab">我的文章</a></li>
+                    <li><a href="#ios" data-toggle="tab">我的想法</a></li>
+                    <li><a href="#mood" data-toggle="tab">我的心情</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content yellowbg" >
+                    <div class="tab-pane fade in active  yellowbg " id="home">
+                        <a id="writeEss" target="_blank">
+                            <div class="white"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> 分享一篇文章？</div>
+                        </a>
+                        <div class="text-center" id="moreArticle">没有更多数据了~</div>
+                        <!--<div class="message">
+                            Nam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec est cons
+                            ecteturNam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec e
+                            st consecteturNam eget purus nec est consectetur vehicula.Nam eget purus nec est consectetur ve
+                            hicula.Nam eget purus nec est consectetur vehicula. Nullam ultrices nisl risus, in viverra liber
+                            oegestas sit amet. Etiam porttito
+                            <div class="author">
+                                <b style="float:left;">作者：<span>此处为作者名称</span></b>
+                                <b style="float:right;">发表时间：<span>此处显示发表时间</span></b>
+                            </div>
+                        </div>
+                        <div class="message">
+                            Nam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec est cons
+                            ecteturNam eget purus nec est consecteturNam eget purus nec est consecteturNam eget purus nec e
+                            st consecteturNam eget purus nec est consectetur vehicula.Nam eget purus nec est consectetur ve
+                            hicula.Nam eget purus nec est consectetur vehicula. Nullam ultrices nisl risus, in viverra liber
+                            oegestas sit amet. Etiam porttito
+                            <div class="author">
+                                <b style="float:left;">作者：<span>此处为作者名称</span></b>
+                                <b style="float:right;">发表时间：<span>此处显示发表时间</span></b>
+                            </div>
+                        </div>
+                        <div class="text-center">查看更多</div>-->
+                    </div>
+
+                    <div class="tab-pane fade yellowbg" id="ios">
+                        <!--<a id="writeQue" target="_blank">
+                            <div class="white"><i class="fa fa-pencil" aria-hidden="true">提出一个想法？有什么问题我们一起解决！</i> </div>
+                        </a>
+                        <div class="text-center">没有更多数据了~</div>-->
+                    </div>
+
+                    <div class="tab-pane fade yellowbg" id="mood">
+
+                        <div class="text-center">查看更多</div>
+                    </div>
+                    <!----------------- 模态框（Modal）------------------------------>
+                    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                    </button>
+                                    <h3 id="myModalLabel">写心情</h3>
+                                    <p>分享好玩有趣的新鲜事，和大家说说你此时此刻的心情。</p>
+                                </div>
+                                <div class="modal-body">
+                                        <textarea rows="10" id="articleContent" cols="78"
+                                                  style="resize:none"></textarea>
+                                </div>
+                                <!--需要上传图片或视频的功能-->
+                                <a style="color:#FBC216;text-decoration: none;padding: 20px"
+                                   href="javascript:{$('#file').click();}">
+                                    <i class="fa fa-camera" aria-hidden="true" id="uploadF">上传照片或视频</i>
+                                </a>
+                                <form id="form">
+                                    <input type="file" id="file" name="file" style="display:none;"
+                                           onchange="upload()"/>
+                                </form>
+                                <div class="modal-footer">
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+                                    <button class="btn btn-primary" onclick="addArticle()">发布</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---------------------- 底部左侧文章 结束-------------------------------->
+
+            <div class="col-xs-1"></div>
+
+            <!---------------------- 底部右侧文章 开始-------------------------------->
+            <div class="col-xs-3" id="bottomword">
+                <div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <div class="titleword" id="myAchieve"></div>
+                        <li>
+                            <div class="btn-group ">
+                                <button class="mybtn">
+                                    <i class="fa fa-thumbs-o-up fa-3x" aria-hidden="true"></i>
+                                    <p>赞同</p>
+                                    <!--此处需显示对应数据-->
+                                    <p id="likeSum">0</p>
+                                </button>
+                                <button class="mybtn"><i class="fa fa-commenting-o fa-3x" aria-hidden="true"></i><p>点子</p>
+                                    <p id="commentSum">0</p></button>
+                                <button class="mybtn "><i class="fa fa-gg fa-3x" aria-hidden="true"></i><p>积分</p>
+                                    <p id="userIntegral">0</p></button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <hr>
+
+                <div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <div class="titleword" id="myLevel"></div><!--此处需显示对应等级-->
+                        <li><a id="vip">进入会员中心</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!---------------------- 底部右侧文章 结束-------------------------------->
+
+            <div class="col-xs-1"></div>
+        </div>
+    </div>
+    <!--底部信息-->
+    <div class="bottomcontent text-center">
+        <hr>
+        刘妙玲制作 · Design by Milly <br>
+        金点子指南 · 金点子协议 · 金点子隐私保护指引 · 应用 · 工作 · 申请开通知乎机构号 · 侵权举报 · 网上有害信息举报专区 · 儿童色情信息举报专区<br>
+        违法和不良信息举报：012-34567891 · 电信与服务业务经营许可证 · 网络文化经营许可证 ·联系我们 © 2019 金点子<br>
+    </div>
+</div>
+</body>
+</html>

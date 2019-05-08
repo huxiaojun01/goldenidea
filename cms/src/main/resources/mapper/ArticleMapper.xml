@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldenidea.cms.dao.ArticleDao">
+    <insert id="addArticle">
+        insert into fun_article(article_pk,articleTitle,articleContent,articleHtml,file_pk,
+          articleTextNumber,articleRead,commentNumber,likeNumber,unLikeNumber,articleType,articlePower,user_pk,createTime)
+        values(#{article_pk},#{articleTitle},#{articleContent},#{articleHtml},#{file_pk},
+          #{articleTextNumber},0,0,0,0,#{articleType},#{articlePower},#{user_pk},now())
+    </insert>
+    <delete id="deleteArticleByPK">
+        delete from fun_article where article_pk=#{article_pk}
+    </delete>
+    <select id="getArticleByPK" resultType="Map">
+        select a.article_pk,a.articleTitle,a.articleContent,a.articleHtml,a.file_pk,
+        a.articleTextNumber,a.articleRead,a.commentNumber,a.likeNumber,a.unLikeNumber,a.articleType,a.articlePower,a.user_pk,
+        date_format(a.createTime,'%Y-%m-%d %H:%i:%S') createTime,f.fileUrl,u.telphone
+        from fun_article a
+        left join fun_file f on (a.file_pk=f.file_pk and f.fileState!=0)
+        inner join sch_user u on a.user_pk=u.user_pk
+        where a.article_pk=#{article_pk}
+    </select>
+    <select id="getArticleListPaging" resultType="Map">
+        select a.article_pk,a.articleTitle,a.articleContent,a.articleHtml,a.file_pk,
+        a.articleTextNumber,a.articleRead,a.commentNumber,a.likeNumber,a.articleType,a.articlePower,a.user_pk,
+        date_format(a.createTime,'%Y-%m-%d %H:%i:%S') createTime,u.telphone
+        from fun_article a inner join sch_user u on u.user_pk=a.user_pk
+        where a.articlePower in(${articlePower}) and a.articleState!=0
+        <if test="articleType!=null and articleType!=-1">
+            and a.articleType=#{articleType}
+        </if>
+        <if test="searchKey!=null and searchKey!=''">
+            and (a.articleTitle like concat("%",#{searchKey},"%") or a.articleContent like concat("%",#{searchKey},"%"))
+        </if>
+        order by a.createTime desc
+        limit #{offset},#{rows}
+    </select>
+    <select id="getTotalCount" resultType="int">
+        select count(*) from fun_article
+        where articlePower in(${articlePower}) and articleState!=0
+        <if test="articleType!=null and articleType!=-1">
+            and articleType=#{articleType}
+        </if>
+        <if test="searchKey!=null and searchKey!=''">
+            and (articleTitle like concat("%",#{searchKey},"%") or articleContent like concat("%",#{searchKey},"%"))
+        </if>
+    </select>
+    <update id="addArticleReadByPK">
+        update fun_article set articleRead=articleRead+1 where article_pk=#{article_pk};
+    </update>
+    <update id="addCommentNumberByPK">
+        update fun_article set commentNumber=commentNumber+1 where article_pk=#{article_pk};
+    </update>
+    <update id="addLikeNumberByPK">
+        update fun_article set likeNumber=likeNumber+1 where article_pk=#{article_pk}
+    </update>
+    <update id="addUnLikeNumberByPK">
+        update fun_article set unLikeNumber=unLikeNumber+1 where article_pk=#{article_pk}
+    </update>
+    <select id="isLike" resultType="int">
+        select count(*) from fun_commentrecord where user_pk=#{user_pk} and article_pk=#{article_pk} and type=#{type}
+    </select>
+    <select id="getArticleByUserPkAndArticleTypeListPaging" resultType="Map">
+        select a.article_pk,a.articleTitle,a.articleContent,a.articleHtml,a.file_pk,
+        a.articleTextNumber,a.articleRead,a.commentNumber,a.likeNumber,a.articleType,a.articlePower,a.user_pk,
+        date_format(a.createTime,'%Y-%m-%d %H:%i:%S') createTime,u.telphone
+        from fun_article a left join sch_user u on u.user_pk=a.user_pk
+        where 1=1 and a.articleState!=0
+        <if test="articleType!=null and articleType!=-1">
+            and a.articleType=#{articleType}
+        </if>
+        <if test="searchKey!=null and searchKey!=''">
+            and (a.articleTitle like concat("%",#{searchKey},"%") or a.articleContent like concat("%",#{searchKey},"%"))
+        </if>
+        <if test="user_pk!=null and user_pk!=''">
+            and a.user_pk=#{user_pk}
+        </if>
+        order by a.createTime desc
+        limit #{offset},#{rows}
+    </select>
+    <select id="getTotalCountByUserPkAndArticleType" resultType="int">
+        select count(*) from fun_article a
+        where 1=1 and a.articleState!=0
+        <if test="articleType!=null and articleType!=-1">
+            and a.articleType=#{articleType}
+        </if>
+        <if test="searchKey!=null and searchKey!=''">
+            and (a.articleTitle like concat("%",#{searchKey},"%") or a.articleContent like concat("%",#{searchKey},"%"))
+        </if>
+        <if test="user_pk!=null and user_pk!=''">
+            and a.user_pk=#{user_pk}
+        </if>
+    </select>
+    <update id="updateArticle">
+        update fun_article set articleTitle=#{articleTitle},articleContent=#{articleContent},articleHtml=#{articleHtml},
+            file_pk=#{file_pk},articlePower=#{articlePower},
+            articleTextNumber=#{articleTextNumber}
+        where article_pk=#{article_pk}
+    </update>
+</mapper>

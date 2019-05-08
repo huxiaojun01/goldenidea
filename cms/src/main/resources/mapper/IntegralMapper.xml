@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldenidea.cms.dao.IntegralDao">
+    <insert id="addIntegral">
+        insert into fun_integral(integral_pk,user_pk,article_pk,integralType,integralBusiness,integralValue,integralTime)
+        values(#{integral_pk},#{user_pk},#{article_pk},#{integralType},#{integralBusiness},#{integralValue},now())
+    </insert>
+    <update id="addUserIntegral">
+        update sch_user set userIntegral=userIntegral+${integralValue} where user_pk=#{user_pk}
+    </update>
+    <update id="reduceUserIntegral">
+        update sch_user set userIntegral=userIntegral-${integralValue} where user_pk=#{user_pk}
+    </update>
+</mapper>

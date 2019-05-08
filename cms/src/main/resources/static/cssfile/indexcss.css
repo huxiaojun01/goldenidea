@@ -1,0 +1,115 @@
+#myCarousel{width: 980px;margin: 0 auto;}
+body{
+    color: #262626;
+    background: #F7F7F7;
+    margin-bottom: 50px;
+}
+textarea{resize: none;}
+.inline{display: inline}
+#myNavbar a:focus{color:#fbc216;background-color:#262626;}
+#myNavbar input[type="button"]{width:70px;}
+.active,.message,.author,#bottomword ul{background-color: white}
+a{color:#262626;}
+.navbar-header>img{ margin:0px 30px 0px 150px}
+
+.yellowbg{background-color: #FBC216;}
+.yellow{
+    background: #FBC216;
+    margin:50px 0 50px 0;
+    padding: 30px;
+}
+.search{margin-left: 30px}
+.search>input{width: 200px;}
+
+.search>input,.search>.button,#myNavbar input[type="button"]{
+    height: 36px;
+    border-radius: 3px;
+    border: none;
+    margin-top: 7px;
+    vertical-align: top
+}
+.search>.button{
+    background-color: #262626;
+    color: #fbc216;
+    width:70px ;
+    margin-left: 5px;
+    margin-right: 200px;
+}
+.icon1,.icon2,.icon3{
+    background:url("../img/righttop.jpg");
+    background-repeat:no-repeat;
+    height:100px;
+    width:80px;
+}
+.message{float:none;border-radius:3px;margin:20px auto;padding: 10px;}
+.author{height:10px;text-align: center;}
+
+#myCarousel>a{background-color: transparent}
+.container{margin-top: 50px}
+.icon1{background-position:-10px 0px;}
+.icon2{background-position:-100px 0px;}
+.icon3{background-position:-190px 0px;}
+.bottomcontent{color: white;margin-bottom:0}
+.dropdown{margin-left: 20px;margin-right: 20px}
+/*金点子-登录*/
+.form{background: rgba(251,194,22,1);width:330px;margin:0px auto;border-radius: 10px;}
+.form .fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
+input[type="text"],input[type="password"]{padding-left:26px;}
+.checkbox{padding-left:21px;}
+.error{color:red;}
+.submitbtn{width: 100%;height:30px;border-radius:5px;border:none;background-color: #262626;color: white;margin-bottom: 10px}
+
+
+/*个人中心*/
+.topimf{background-color: rgba(38,38,38,0.9);color: #fbc216;padding-top: 10px;}
+.headphoto{background-color: gray;width: 120px;height: 120px;border: 3px solid white;position:absolute;top: 60px;left: 50px;z-index:100;}
+.form-group{margin-top: 30px;}
+.return{width: 150px;height: 30px;border-radius: 3px;float: right;margin: 10px auto;padding:5px;background-color: white;}
+.mybtn{width: 83px;border: none;outline:none;margin-top: 10px}
+#bottomword>div{border: 1px solid gainsboro}
+.titleword{font-size: 15px;font-weight: bold;padding: 10px;border-bottom: 1px solid gainsboro}
+.white{background-color: white;color: #262626;margin-top:10px;margin-bottom:10px;padding: 10px}
+#myTabContent a{text-decoration: none}
+#myTab{width: 100%}
+#myTab a{width: 100px}
+.back,.save{width: 150px;color: #fbc216;background-color: #262626;margin-top: 20px;margin-bottom: 20px}
+.save{margin-left: 50px}
+
+/*function*/
+ul.nav-tabs{
+    width: 150px;
+    text-align: center;
+}
+#myScrollspy a{width: 100%;}
+#myScrollspy{position:fixed;margin-left: 80px;}
+.downloadbtn{background: transparent;border-radius: 5px;float:right}
+#uploadbtn{
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    width: 100px;
+    height: 30px;
+    background-color:#262626;
+    color:white;
+    border-radius: 5px;
+}
+#upload{display: none}
+#path{width: 70%;border: none;background-color: transparent}
+input[type="radio"]{border: 2px solid red;}
+#file div{
+    margin: 30px auto;
+    float: none;
+    padding: 15px 30px;
+}
+#filectr input[type="text"]{padding: 0px 10px;background-color: transparent;border: none;border-bottom:1px solid #262626;color:gray;outline: none;width: 80px}
+#filectr input[type="radio"]{margin-left: 10px}
+.rbtn,.rwbtn{background-color: transparent;box-shadow: 1px solid #bbbbbb;border-radius:3px}
+.rwbtn{margin-left: 20px}
+.fbbtn{float:right;position: relative;top: -35px;left: -10px;width: 80px;background-color:#262626;color: #FBC216;border-radius: 5px}
+.picture{height: 200px;background-color: white}
+
+/*login and register*/
+.lrword{margin: 300px 0px 20px}
+#register_btn,#back_btn{color:#4192F9;text-decoration: none}
+
+.toptitle{margin-right: 600px}

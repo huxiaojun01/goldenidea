@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldenidea.cms.dao.ResourceDao">
+   <insert id="addResource">
+       insert into fun_file(file_pk,fileName,fileUrl,fileState,uploadTime)
+       values(#{file_pk},#{fileName},#{fileUrl},2,now())
+   </insert>
+    <delete id="deleteResourceByPK">
+        delete from fun_file where file_pk=#{file_pk}
+    </delete>
+    <select id="getResourceByPK" resultType="Map">
+        select * from fun_file where file_pk=#{file_pk}
+    </select>
+    <!--获取待审核资源-->
+    <select id="getResourceListPaging" resultType="Map">
+        select * from fun_file <!--where fileState=2-->
+        limit #{offset},#{rows}
+    </select>
+    <select id="getTotalCount" resultType="int">
+        select count(*) from fun_file <!--where fileState=2-->
+    </select>
+    <update id="updateResourceState">
+        update fun_file set fileState=#{fileState} where file_pk=#{file_pk}
+    </update>
+</mapper>
