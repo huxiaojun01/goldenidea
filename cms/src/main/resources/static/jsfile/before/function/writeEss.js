@@ -1,7 +1,7 @@
 var telphone = getUrlParamValue("telphone");
 var userFaceUrl = getUrlParamValue("userFaceUrl");
 var articleImage="";    //封面图片
-var esource;   //资源路径
+var resource;   //资源路径
 $(function () {
     if(userFaceUrl!=null && userFaceUrl!='' && userFaceUrl !='null'){
         $("#userFaceUrl").attr("src", "http://localhost:8080/storage/" + userFaceUrl);
