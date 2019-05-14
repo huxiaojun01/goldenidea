@@ -88,8 +88,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public MessageUtil deleteArticleByPK(String article_pk) {
         MessageUtil mu = new MessageUtil();
-        int i = this.articleDao.deleteArticleByPK(article_pk);
         Map<String, Object> article = this.articleDao.getArticleByPK(article_pk);
+        int i = this.articleDao.deleteArticleByPK(article_pk);
         if (i > 0) {
             mu.setM_istatus(1);
             mu.setM_strMessage("删除成功！");
@@ -98,9 +98,9 @@ public class ArticleServiceImpl implements ArticleService {
             //同时删除点赞记录
             this.commentDao.deleteLikeRecordByArticlePK(article_pk);
             //删除资源
+            Map<String, Object> resource = this.resourceDao.getResourceByPK(article.get("file_pk").toString());
             int i1 = this.resourceDao.deleteResourceByPK(article.get("file_pk").toString());
             if (i1 > 0) {
-                Map<String, Object> resource = this.resourceDao.getResourceByPK(article.get("file_pk").toString());
                 String fileUrl = resource.get("fileUrl").toString();
                 //删除文件
                 File newFile = new File(fileStorage + fileUrl);
@@ -110,8 +110,8 @@ public class ArticleServiceImpl implements ArticleService {
                 }
             }
             if (article.get("resource_pk") != null) {
-                Map<String, Object> resource = this.resourceDao.getResourceByPK(article.get("resource_pk").toString());
-                String fileUrl = resource.get("fileUrl").toString();
+                Map<String, Object> r = this.resourceDao.getResourceByPK(article.get("resource_pk").toString());
+                String fileUrl = r.get("fileUrl").toString();
                 int i2 = this.resourceDao.deleteResourceByPK(article.get("resource_pk").toString());
                 if (i2 > 0) {
                     //删除文件
