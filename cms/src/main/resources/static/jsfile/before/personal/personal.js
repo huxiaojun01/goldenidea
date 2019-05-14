@@ -32,6 +32,7 @@ $(function () {
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
         var activeTab = $(e.target).text(); //1-文章  2-心情  3-想法
         if (activeTab == "我的文章") {
+            $("#moreArticle").remove();
             page = 0;
             articleType = 1;
             isFirst = 0;
@@ -41,6 +42,7 @@ $(function () {
                 "</a><div class=\"text-center\" id='moreArticle'>没有更多数据了~</div>");
             getArticleList(articleType, 2);
         } else if (activeTab == "我的想法") {
+            $("#moreArticle").remove();
             page = 0;
             articleType = 3;
             isFirst = 0;
@@ -50,6 +52,7 @@ $(function () {
                 "</a><div class=\"text-center\" id='moreArticle'>没有更多数据了~</div>");
             getArticleList(articleType, 2);
         } else if (activeTab == "我的心情") {
+            $("#moreArticle").remove();
             page = 0;
             articleType = 2;
             $("#mood").html("<a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"><div class=\"white\"><i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i> 今天有啥想吐槽的不？</div>" +
@@ -160,7 +163,7 @@ function getArticleList(articleType, pageRows) {
                     if ((page + 1) <  total) {
                         html += "<div id='moreArticle' style='cursor: pointer;' class=\"text-center\" onclick='moreArticle()'>查看更多</div>";
                     } else {    //最后一页
-                        html += "<div style='cursor: pointer;' class=\"text-center\">没有更多数据了~</div>";
+                        html += "<div id='moreArticle' style='cursor: pointer;' class=\"text-center\">没有更多数据了~</div>";
                     }
 
                     if (articleType == 1) {    //1-文章  2-心情  3-想法
