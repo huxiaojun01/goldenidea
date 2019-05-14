@@ -614,12 +614,14 @@ function getUserDataListPaging() {
 }
 
 function exportExcel(b) {
-    var param = "page=" + (b ? 0 : page) + "&pageRows=" + (b ? totalCount : 10);
-    var url = "../../userController/exportExcel.do?";
-    if (b) { //导出所有页
-        $("#excelAll").attr("href", url + param);
-    } else {    //导出当前页
-        $("#excel").attr("href", url + param);
+    if(confirm("是否下载资源？")){
+        var param = "page=" + (b ? 0 : page) + "&pageRows=" + (b ? totalCount : 10);
+        var url = "../../userController/exportExcel.do?";
+        if (b) { //导出所有页
+            $("#excelAll").attr("href", url + param);
+        } else {    //导出当前页
+            $("#excel").attr("href", url + param);
+        }
     }
 }
 

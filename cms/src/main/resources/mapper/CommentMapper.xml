@@ -40,12 +40,12 @@
     <select id="getCommentListPaging" resultType="Map">
         select *
         from fun_comment c
-        <!--where c.commentState=2 --> <!--2:待审核-->
+        where c.commentState=2 <!--2:待审核-->
         order by commentTime desc
         limit #{offset},#{rows}
     </select>
     <select id="getTotalCount" resultType="int">
-        select count(*) from fun_comment c <!--where c.commentState=2-->  <!--2:待审核-->
+        select count(*) from fun_comment c where c.commentState=2  <!--2:待审核-->
     </select>
     <update id="updateCommentState">
         update fun_comment set commentState=#{commentState} where comment_pk=#{comment_pk}

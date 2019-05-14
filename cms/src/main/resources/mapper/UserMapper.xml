@@ -63,11 +63,11 @@
         where u.user_pk=#{user_pk}
     </select>
     <select id="getUnauditedLevelListPaging" resultType="Map">
-        select * from sch_user where userType!=0 and userLevel!=-1
+        select * from sch_user where userType!=0 and userLevel!=-1 and userLevelState=2
         limit #{offset},#{rows}
     </select>
     <select id="getUnauditedLevelTotal" resultType="int">
-        select count(*) from sch_user where userType!=0 and userLevel!=-1
+        select count(*) from sch_user where userType!=0 and userLevel!=-1 and userLevelState=2
     </select>
     <!--等级审核-->
     <update id="updateUserLevelStateByPK">
@@ -76,11 +76,11 @@
         where user_pk=#{user_pk}
     </update>
     <select id="getUnauditedPersonalMessageListPaging" resultType="Map">
-        select * from sch_user where sendWord is not null and sendWord!=""
+        select * from sch_user where sendWord is not null and sendWord!="" and sendWordAndSummaryState=2
         limit #{offset},#{rows}
     </select>
     <select id="getUnauditedPersonalMessageTotal" resultType="int">
-        select count(*) from sch_user where  sendWord is not null and sendWord!=""
+        select count(*) from sch_user where  sendWord is not null and sendWord!="" and sendWordAndSummaryState=2
     </select>
     <update id="updateSendWordAndSummaryStateByPK">
         update sch_user

@@ -13,11 +13,11 @@
     </select>
     <!--获取待审核资源-->
     <select id="getResourceListPaging" resultType="Map">
-        select * from fun_file <!--where fileState=2-->
+        select * from fun_file where fileState=2
         limit #{offset},#{rows}
     </select>
     <select id="getTotalCount" resultType="int">
-        select count(*) from fun_file <!--where fileState=2-->
+        select count(*) from fun_file where fileState=2
     </select>
     <update id="updateResourceState">
         update fun_file set fileState=#{fileState} where file_pk=#{file_pk}

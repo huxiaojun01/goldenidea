@@ -9,10 +9,12 @@ import com.goldenidea.cms.service.ArticleService;
 import com.goldenidea.cms.utils.DataUtil;
 import com.goldenidea.cms.utils.MessageUtil;
 import com.goldenidea.cms.utils.Snowflake;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,8 @@ public class ArticleServiceImpl implements ArticleService {
     IntegralDao integralDao;
     @Resource
     ResourceDao resourceDao;
+    @Value("${file.storage}")
+    private String fileStorage;
 
 
     @Override
@@ -85,6 +89,7 @@ public class ArticleServiceImpl implements ArticleService {
     public MessageUtil deleteArticleByPK(String article_pk) {
         MessageUtil mu = new MessageUtil();
         int i = this.articleDao.deleteArticleByPK(article_pk);
+        Map<String, Object> article = this.articleDao.getArticleByPK(article_pk);
         if (i > 0) {
             mu.setM_istatus(1);
             mu.setM_strMessage("删除成功！");
@@ -92,6 +97,31 @@ public class ArticleServiceImpl implements ArticleService {
             this.commentDao.deleteCommentByArticlePK(article_pk);
             //同时删除点赞记录
             this.commentDao.deleteLikeRecordByArticlePK(article_pk);
+            //删除资源
+            int i1 = this.resourceDao.deleteResourceByPK(article.get("file_pk").toString());
+            if (i1 > 0) {
+                Map<String, Object> resource = this.resourceDao.getResourceByPK(article.get("file_pk").toString());
+                String fileUrl = resource.get("fileUrl").toString();
+                //删除文件
+                File newFile = new File(fileStorage + fileUrl);
+                //判断是否存在文件夹
+                if (!newFile.exists()) {
+                    newFile.mkdirs();
+                }
+            }
+            if (article.get("resource_pk") != null) {
+                Map<String, Object> resource = this.resourceDao.getResourceByPK(article.get("resource_pk").toString());
+                String fileUrl = resource.get("fileUrl").toString();
+                int i2 = this.resourceDao.deleteResourceByPK(article.get("resource_pk").toString());
+                if (i2 > 0) {
+                    //删除文件
+                    File newFile = new File(fileStorage + fileUrl);
+                    //判断是否存在文件夹
+                    if (!newFile.exists()) {
+                        newFile.mkdirs();
+                    }
+                }
+            }
         } else {
             mu.setM_istatus(0);
             mu.setM_strMessage("删除失败！");
