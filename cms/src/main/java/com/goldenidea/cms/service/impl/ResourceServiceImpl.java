@@ -1,6 +1,10 @@
 package com.goldenidea.cms.service.impl;
 
+import com.goldenidea.cms.dao.ArticleDao;
+import com.goldenidea.cms.dao.CommentDao;
+import com.goldenidea.cms.dao.IntegralDao;
 import com.goldenidea.cms.dao.ResourceDao;
+import com.goldenidea.cms.service.ArticleService;
 import com.goldenidea.cms.service.ResourceService;
 import com.goldenidea.cms.utils.DataUtil;
 import com.goldenidea.cms.utils.MessageUtil;
@@ -22,6 +26,12 @@ public class ResourceServiceImpl implements ResourceService {
     private String fileStorage;
     @Resource
     ResourceDao resourceDao;
+    @Resource
+    ArticleDao articleDao;
+    @Resource
+    CommentDao commentDao;
+    @Resource
+    ArticleService articleService;
 
 
     @Override
@@ -78,6 +88,11 @@ public class ResourceServiceImpl implements ResourceService {
         if (i>0){
             mu.setM_istatus(1);
             mu.setM_strMessage("审核成功！");
+            String article_pk = this.articleDao.getArticlePkByFilePk(file_pk);
+            if(article_pk!=null&& !article_pk.equals("")&&!article_pk.equals("null")){
+                //删除对应相关信息
+                this.articleService.deleteArticleByPK(article_pk);
+            }
         }else {
             mu.setM_istatus(0);
             mu.setM_strMessage("审核失败！");

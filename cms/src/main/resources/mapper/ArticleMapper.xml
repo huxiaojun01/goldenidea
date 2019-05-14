@@ -5,11 +5,17 @@
         insert into fun_article(article_pk,articleTitle,articleContent,articleHtml,file_pk,resource_pk,
           articleTextNumber,articleRead,commentNumber,likeNumber,unLikeNumber,articleType,articlePower,resourcePower,user_pk,createTime)
         values(#{article_pk},#{articleTitle},#{articleContent},#{articleHtml},#{file_pk},#{resource_pk},
-          #{articleTextNumber},0,0,0,0,#{articleType},#{articlePower},#{resourcePower},#{user_pk},now())
+          #{articleTextNumber},0,0,0,0,#{articleType},#{articlePower},1,#{user_pk},now())
     </insert>
     <delete id="deleteArticleByPK">
         delete from fun_article where article_pk=#{article_pk}
     </delete>
+    <delete id="deleteArticleByFilePk">
+        delete from fun_article where file_pk=#{file_pk} or resource_pk=#{file_pk}
+    </delete>
+    <select id="getArticlePkByFilePk" resultType="String">
+        select article_pk from fun_article where file_pk=#{file_pk}
+    </select>
     <select id="getArticleByPK" resultType="Map">
         select a.article_pk,a.articleTitle,a.articleContent,a.articleHtml,a.file_pk,
         a.articleTextNumber,a.articleRead,a.commentNumber,a.likeNumber,a.unLikeNumber,a.articleType,a.articlePower,a.user_pk,

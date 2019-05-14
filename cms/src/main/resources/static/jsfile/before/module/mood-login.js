@@ -61,6 +61,74 @@ function getArticleList() {
 
     }
 }
+
+//心情--弹窗
+function upload() {
+    var formData = new FormData($("#form")[0]);
+    formData.append("filePath", "/mood");
+    $.ajax({
+        url: '../../../upload.do',
+        type: 'POST',
+        data: formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data.m_istatus == 1) { //上传成功
+                alert(data.m_strMessage);
+                articleImage = data.m_object;   //图片路径
+                $("#uploadF").html($("#file").val());
+            } else {
+                alert(data.m_strMessage);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("请求失败!错误码:" + XMLHttpRequest.status);
+        }
+    });
+}
+
+function addArticle() {
+    var articleContent = $("#articleContent").val();
+    if (articleContent == "") {
+        alert("请输入内容！");
+        return;
+    }
+    var articleTextNumber = articleContent.length;
+    var articleType = 2; //1-文章  2-心情  3-想法
+    var articlePower = 1;   //1-对外开放  2-仅会员可见  3-个人可见
+
+
+    var obj = {};
+    obj['articleTitle'] = "";
+    obj['articleContent'] = articleContent;
+    obj['articleHtml'] = "";
+    obj['articleImage'] = articleImage;
+    obj['articleTextNumber'] = articleTextNumber;
+    obj['articleType'] = articleType;
+    obj['articlePower'] = articlePower;
+
+    $.ajax({
+        url: "../../../articleController/addArticle.do",
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify(obj),
+        contentType: "application/json",
+        success: function (mu) {
+            if (mu.m_istatus == 1) {
+                alert(mu.m_strMessage);
+                window.location.href = "../module/index-login.html?userFaceUrl="+userFaceUrl+"&telphone="+telphone;
+            } else {
+                alert(mu.m_strMessage);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("网络出错!错误码:" + XMLHttpRequest.status);
+            $("#submit").attr("disabled", false);
+        }
+    });
+}
 //查看更多
 function moreArticle() {
     page++;

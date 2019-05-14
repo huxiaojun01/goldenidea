@@ -13,6 +13,10 @@ public interface ArticleDao {
 
     int deleteArticleByPK(String article_pk);
 
+    int deleteArticleByFilePk(String file_pk);
+
+    String getArticlePkByFilePk(String file_pk);
+
     Map<String, Object> getArticleByPK(String article_pk)
             ;
     List<Map<String, Object>> getArticleListPaging(@Param("offset") Integer offset, @Param("rows") Integer rows, @Param("searchKey") String searchKey, @Param("articleType") Integer articleType, @Param("articlePower") String articlePower);
