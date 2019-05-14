@@ -34,7 +34,7 @@ public class UserController {
      */
     @RequestMapping("/login.do")
     public MessageUtil login(HttpServletRequest request, String account, String userPwd) {
-        MessageUtil login = userService.login(account, BaseUtil.MD5(userPwd));
+        MessageUtil login = userService.login(account, userPwd);
         if (login.getM_istatus().intValue() != 0) {
             Map<String, Object> user = (Map) login.getM_object();
             UserSession userSession = new UserSession();
@@ -69,7 +69,6 @@ public class UserController {
      */
     @RequestMapping("/addUser.do")
     MessageUtil addUser(@RequestBody Map<String, Object> user) {
-        user.replace("userPwd", BaseUtil.MD5(user.get("userPwd").toString()));
         return this.userService.addUser(user);
     }
 

@@ -3,6 +3,7 @@ var total = 1;    //总页码
 var totalCount = 0; //总条数
 var telphone = getUrlParamValue("telphone");
 var type = 0;
+var user = {};
 $(function () {
     $("#userName").text(" " + telphone);
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
@@ -54,10 +55,11 @@ function getUserList() {
                     var html = "";
                     $("#data_user").html(html);
                     $.each(data, function (i, o) {
+                        user[o.user_pk] = o.userPwd;
                         html += "<tr id='" + o.user_pk + "'><td>" + o.user_pk + "</td>" +
                             "<td>" + o.telphone + "</td>" +
                             "<td>" + o.email + "</td>" +
-                            "<td>" + o.userPwd + "</td>" +
+                            "<td>******</td>" +
                             "<td>" + (o.userType != 0 ? "用户" : "管理员") + "</td>" +
                             "<td><button type=\"button\" class=\"btn btn-info btn-xs\" onclick='updateUser(this)' id='" + o.user_pk + "'>修改</button>   " +
                             "<button type=\"button\" class=\"btn btn-danger btn-xs\" onclick='deleteUser(this)' id='" + o.user_pk + "'>删除</button></td></tr>";
@@ -185,6 +187,8 @@ function updateUser(ev) {
             html += "<td >" + $(this).text() + "</td>"
         } else if (i == 1) {
             html += "<td ><input value='" + $(this).text() + "'  style='width: 120px;' maxlength='11'/></td>"
+        } else if (i == 3) {
+            html += "<td ><input value='" + user[user_pk] + "'  style='width: 120px;'/></td>"
         } else {
             html += "<td ><input value='" + $(this).text() + "'  style='width: 120px;'/></td>"
         }
@@ -512,9 +516,9 @@ function getUnauditedPersonalMessageListPaging() {
                             "<td>" + o.sendWord + "</td>" +
                             "<td>" + o.summary + "</td>" +
                             "<td><select id='" + o.user_pk + "' onchange='updateSendWordAndSummaryStateByPK(this)'>" +
-                            "<option value='0' "+(o.sendWordAndSummaryState == 0 ? 'selected' : '')+">不通过</option>" +
-                            "<option value='1' "+(o.sendWordAndSummaryState == 1 ? 'selected' : '')+">通过</option>" +
-                            "<option value='2' "+(o.sendWordAndSummaryState == 2 ? 'selected' : '')+">待审核</option></select></td>" +
+                            "<option value='0' " + (o.sendWordAndSummaryState == 0 ? 'selected' : '') + ">不通过</option>" +
+                            "<option value='1' " + (o.sendWordAndSummaryState == 1 ? 'selected' : '') + ">通过</option>" +
+                            "<option value='2' " + (o.sendWordAndSummaryState == 2 ? 'selected' : '') + ">待审核</option></select></td>" +
                             "<td><button type=\"button\" class=\"btn btn-danger btn-xs\" onclick='deleteSendWordAndSummaryByPK(this)'name='" + o.user_pk + "'>删除</button></td></tr>";
                     });
                     $("#data_information").html(html);
@@ -614,7 +618,7 @@ function getUserDataListPaging() {
 }
 
 function exportExcel(b) {
-    if(confirm("是否下载资源？")){
+    if (confirm("是否下载资源？")) {
         var param = "page=" + (b ? 0 : page) + "&pageRows=" + (b ? totalCount : 10);
         var url = "../../userController/exportExcel.do?";
         if (b) { //导出所有页
