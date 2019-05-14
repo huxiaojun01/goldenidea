@@ -3,6 +3,8 @@ var total = 1;    //总页码
 var article_pk = getUrlParamValue("article_pk");
 var telphone = getUrlParamValue("telphone");
 var userFaceUrl = getUrlParamValue("userFaceUrl");
+//下载
+var fileUrl,fileName;
 $(function () {
     if(userFaceUrl!=null && userFaceUrl!='' && userFaceUrl !='null'){
         $("#userFaceUrl").attr("src", "http://localhost:8080/storage/" + userFaceUrl);
@@ -16,6 +18,9 @@ $(function () {
     $("#idea1").attr("href", "../module/idea-login.html?telphone="+telphone+"&userFaceUrl="+userFaceUrl);
     $("#mood1").attr("href", "../module/mood-login.html?telphone="+telphone+"&userFaceUrl="+userFaceUrl);
     getArticleByPK(article_pk);
+    $("#download").click(function () {
+        downloadFile()
+    });
 
 });
 //搜索
@@ -44,7 +49,8 @@ function getArticleByPK(article_pk) {
                 $("#author").html(data.m_object.telphone);
                 //资源下载
                 if (data.m_object.isDownload) { //有下载权限
-                    $("#download").attr("href", "../../../resourceController/download.do?fileUrl=" + data.m_object.fileUrl + "&fileName=" + data.m_object.fileName);
+                    fileUrl = data.m_object.fileUrl;
+                    fileName = data.m_object.fileName;
                 } else {    //无权限下载
                     $("#div").attr("class", "col-xs-6 text-right");
                     $("#download_div").hide();
@@ -59,6 +65,13 @@ function getArticleByPK(article_pk) {
             alert("请求失败!错误码:" + XMLHttpRequest.status);
         }
     });
+}
+
+//下载
+function downloadFile() {
+    if(confirm("是否下载资源？")){
+        $("#download").attr("href", "../../../resourceController/download.do?fileUrl=" + fileUrl + "&fileName=" + fileName);
+    }
 }
 
 //获取评论信息
