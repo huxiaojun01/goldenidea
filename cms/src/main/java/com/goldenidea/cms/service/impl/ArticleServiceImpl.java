@@ -139,7 +139,7 @@ public class ArticleServiceImpl implements ArticleService {
             //下载权限判断 (文件权限：1-对外开放  2-仅会员可见  3-个人可见)
             boolean isDownload = false; //下载权限
             int resourcePower = Integer.parseInt(article.get("resourcePower").toString());
-            String userType = user.getUserType();   //0-管理员  1-VIP 2-普通用户
+            String userType = user!=null?user.getUserType():"2";   //0-管理员  1-VIP 2-普通用户
             if (resourcePower == 1) {   //对外开放
                 isDownload = true;
             } else if (resourcePower == 2) {    //仅会员
@@ -151,7 +151,7 @@ public class ArticleServiceImpl implements ArticleService {
             } else { //个人可见
 
             }
-            String login_user_pk = user.getUser_pk();
+            String login_user_pk = user!=null?user.getUser_pk():"";
             String user_pk = article.get("user_pk").toString();
             if (login_user_pk.equals(user_pk)) {  //本人资源--可下载
                 isDownload = true;

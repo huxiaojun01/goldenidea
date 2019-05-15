@@ -29,7 +29,7 @@ function getArticleByPK(article_pk) {
                 $("#author").html(data.m_object.telphone);
                 user_pk = data.m_object.user_pk;
                 //评论
-                getFirstLevelByArticlePK(article_pk);
+                //getFirstLevelByArticlePK(article_pk);
             } else {
                 alert(data.m_strMessage);
             }
@@ -53,6 +53,15 @@ function moreComment() {
 
 //发表评论
 function addComment() {
+    alert("请登录！");
+}
+
+//点赞
+function addLikeNumber() {
+    alert("请登录！");
+}
+//反对
+function addUnLikeNumber() {
     alert("请登录！");
 }
 
