@@ -29,17 +29,20 @@ $(function () {
             page = 0;
             articleType = 1;
             isFirst = 0;
+            total = 1;
             $("#home").html("");
             getArticleList(articleType, 2);
         } else if (activeTab == "点子") {
             page = 0;
             articleType = 3;
             isFirst = 0;
+            total = 1;
             $("#ios").html("");
             getArticleList(articleType, 2);
         } else if (activeTab == "心情") {
             page = 0;
             articleType = 2;
+            total = 1;
             $("#mood").html("");
             isFirst = 0;
             getArticleList(articleType, 2);
