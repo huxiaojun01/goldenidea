@@ -72,7 +72,7 @@
     <!--等级审核-->
     <update id="updateUserLevelStateByPK">
         update sch_user
-        set userLevelState=#{userLevelState}
+        set userLevelState=#{userLevelState},userType=1
         where user_pk=#{user_pk}
     </update>
     <select id="getUnauditedPersonalMessageListPaging" resultType="Map">
